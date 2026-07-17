@@ -1,0 +1,67 @@
+.introRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.introBars {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.introBar {
+  flex: 1;
+  background: #050816;
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+.introBar:last-child {
+  border-right: none;
+}
+
+.introCenter {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.introCounter {
+  font-family: var(--font-jetbrains-mono, "JetBrains Mono", monospace);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 500;
+  color: #e5e7eb;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.introPercent {
+  font-size: 0.5em;
+  color: #8b90a3;
+}
+
+.introBarTrack {
+  width: 220px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.introBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #22d3ee, #3b82f6, #8b5cf6);
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .introRoot {
+    display: none;
+  }
+}

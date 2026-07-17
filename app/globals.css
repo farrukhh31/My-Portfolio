@@ -1,0 +1,701 @@
+@import "tailwindcss";
+
+/* ==================================================
+   Root Variables
+================================================== */
+
+:root {
+  --background: #030712;
+  --foreground: #f8fafc;
+
+  --primary: #22d3ee;
+  --secondary: #8b5cf6;
+
+  --muted: #94a3b8;
+
+  --glass: rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.08);
+
+  --shadow:
+    0 30px 80px rgba(0,0,0,0.35);
+
+  --glow:
+    rgba(34,211,238,0.25);
+}
+
+
+/* ==================================================
+   Reset
+================================================== */
+
+*,
+*::before,
+*::after {
+
+  box-sizing:border-box;
+
+}
+
+
+html {
+
+  scroll-behavior:smooth;
+
+}
+
+
+body {
+
+  margin:0;
+
+  position:relative;
+
+  min-height:100vh;
+
+  overflow-x:hidden;
+
+  background:var(--background);
+
+  color:var(--foreground);
+
+  font-feature-settings:
+    "ss01" on,
+    "cv01" on;
+
+}
+
+
+/* Images */
+
+img {
+
+  display:block;
+
+  max-width:100%;
+
+}
+
+
+
+/* ==================================================
+   Selection
+================================================== */
+
+::selection {
+
+  background:var(--primary);
+
+  color:#000;
+
+}
+
+
+
+/* ==================================================
+   Scrollbar
+================================================== */
+
+
+::-webkit-scrollbar {
+
+  width:8px;
+
+}
+
+
+::-webkit-scrollbar-track {
+
+  background:#030712;
+
+}
+
+
+::-webkit-scrollbar-thumb {
+
+  background:#1e293b;
+
+  border-radius:999px;
+
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+
+  background:
+    linear-gradient(
+      180deg,
+      #22d3ee,
+      #8b5cf6
+    );
+
+}
+
+
+* {
+
+  scrollbar-width:thin;
+
+  scrollbar-color:#334155 #030712;
+
+}
+
+
+
+/* ==================================================
+   Background Grid
+================================================== */
+
+
+body::before {
+
+  content:"";
+
+  position:fixed;
+
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:0;
+
+
+  background-image:
+
+  linear-gradient(
+    rgba(255,255,255,.035) 1px,
+    transparent 1px
+  ),
+
+  linear-gradient(
+    90deg,
+    rgba(255,255,255,.035) 1px,
+    transparent 1px
+  );
+
+
+  background-size:
+    60px 60px;
+
+
+  mask-image:
+    radial-gradient(
+      circle,
+      black 20%,
+      transparent 90%
+    );
+
+}
+
+
+
+/* ==================================================
+   Noise
+================================================== */
+
+
+body::after {
+
+  content:"";
+
+  position:fixed;
+
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:1;
+
+  opacity:.15;
+
+
+  background-image:
+
+  radial-gradient(
+    rgba(255,255,255,.035) 1px,
+    transparent 1px
+  );
+
+
+  background-size:
+    6px 6px;
+
+}
+
+
+
+/* ==================================================
+   Main Layer
+================================================== */
+
+
+main {
+
+  position:relative;
+
+  z-index:5;
+
+}
+
+
+
+/* ==================================================
+   Layout
+================================================== */
+
+
+.container-width {
+
+  width:
+    min(
+      1280px,
+      calc(100% - 48px)
+    );
+
+  margin-inline:auto;
+
+}
+
+
+
+.section {
+
+  position:relative;
+
+  width:100%;
+
+  min-height:100vh;
+
+  padding-block:6rem;
+
+}
+
+
+.section-padding {
+
+  padding-block:7rem;
+
+}
+
+
+
+/* ==================================================
+   Aurora
+================================================== */
+
+
+.aurora {
+
+  position:absolute;
+
+  inset:0;
+
+  overflow:hidden;
+
+}
+
+
+
+.aurora::before {
+
+  content:"";
+
+  position:absolute;
+
+  left:-20%;
+
+  top:-10%;
+
+
+  width:700px;
+
+  height:700px;
+
+
+  border-radius:999px;
+
+
+  background:
+
+  radial-gradient(
+    circle,
+    rgba(34,211,238,.18),
+    transparent 70%
+  );
+
+
+  animation:
+    auroraMove 14s ease-in-out infinite;
+
+}
+
+
+
+.aurora::after {
+
+  content:"";
+
+  position:absolute;
+
+
+  right:-20%;
+
+  bottom:-10%;
+
+
+  width:650px;
+
+  height:650px;
+
+
+  border-radius:999px;
+
+
+  background:
+
+  radial-gradient(
+    circle,
+    rgba(139,92,246,.16),
+    transparent 70%
+  );
+
+
+  animation:
+    auroraMove2 18s ease-in-out infinite;
+
+}
+
+
+
+/* ==================================================
+   Glass
+================================================== */
+
+
+.glass {
+
+  background:var(--glass);
+
+  backdrop-filter:
+    blur(26px);
+
+  -webkit-backdrop-filter:
+    blur(26px);
+
+
+  border:
+    1px solid var(--glass-border);
+
+
+  box-shadow:
+    var(--shadow);
+
+}
+
+
+
+/* ==================================================
+   Gradient Border
+================================================== */
+
+
+.border-gradient {
+
+  position:relative;
+
+}
+
+
+
+.border-gradient::before {
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+
+  padding:1px;
+
+  border-radius:inherit;
+
+
+  background:
+
+  linear-gradient(
+    135deg,
+    rgba(255,255,255,.18),
+    rgba(34,211,238,.3),
+    rgba(139,92,246,.28),
+    rgba(255,255,255,.15)
+  );
+
+
+  mask:
+
+  linear-gradient(#fff 0 0) content-box,
+  linear-gradient(#fff 0 0);
+
+
+  mask-composite:exclude;
+
+}
+
+
+
+/* ==================================================
+   Effects
+================================================== */
+
+
+.glow {
+
+  animation:
+    glowPulse 6s ease-in-out infinite;
+
+}
+
+
+
+.float {
+
+  animation:
+    float 7s ease-in-out infinite;
+
+}
+
+
+
+.shine {
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+
+.shine::after {
+
+  content:"";
+
+  position:absolute;
+
+
+  top:-20%;
+
+  left:-120%;
+
+
+  width:50%;
+
+  height:140%;
+
+
+  transform:rotate(20deg);
+
+
+  background:
+
+  linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.22),
+    transparent
+  );
+
+
+  animation:
+    shine 6s linear infinite;
+
+}
+
+
+
+/* ==================================================
+   Text Gradient
+================================================== */
+
+
+.text-gradient {
+
+
+background:
+
+linear-gradient(
+90deg,
+#22d3ee,
+#60a5fa,
+#8b5cf6
+);
+
+
+background-clip:text;
+
+-webkit-background-clip:text;
+
+
+color:transparent;
+
+
+}
+
+
+
+/* ==================================================
+   Animations
+================================================== */
+
+
+@keyframes float {
+
+0% {
+
+transform:translateY(0);
+
+}
+
+50% {
+
+transform:translateY(-10px);
+
+}
+
+100% {
+
+transform:translateY(0);
+
+}
+
+}
+
+
+
+@keyframes glowPulse {
+
+
+0% {
+
+box-shadow:
+0 0 40px rgba(34,211,238,.1);
+
+}
+
+
+50% {
+
+box-shadow:
+0 0 80px rgba(34,211,238,.25);
+
+}
+
+
+100% {
+
+box-shadow:
+0 0 40px rgba(34,211,238,.1);
+
+}
+
+
+}
+
+
+
+@keyframes shine {
+
+
+0% {
+
+left:-130%;
+
+}
+
+
+100% {
+
+left:180%;
+
+}
+
+
+}
+
+
+
+@keyframes auroraMove {
+
+
+0% {
+
+transform:translate(0,0);
+
+}
+
+
+50% {
+
+transform:translate(80px,40px);
+
+}
+
+
+100% {
+
+transform:translate(0,0);
+
+}
+
+
+}
+
+
+
+@keyframes auroraMove2 {
+
+
+0% {
+
+transform:translate(0,0);
+
+}
+
+
+50% {
+
+transform:translate(-80px,-30px);
+
+}
+
+
+100% {
+
+transform:translate(0,0);
+
+}
+
+
+}
+
+
+
+/* Certificate Skeleton */
+
+@keyframes shimmer {
+
+
+0% {
+
+transform:translateX(-100%);
+
+}
+
+
+100% {
+
+transform:translateX(200%);
+
+}
+
+
+}

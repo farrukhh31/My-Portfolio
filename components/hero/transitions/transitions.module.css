@@ -1,0 +1,21 @@
+.routeTransition {
+  min-height: 100vh;
+}
+
+.progressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform-origin: left;
+  background: linear-gradient(90deg, #22d3ee, #3b82f6, #8b5cf6);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressBar {
+    display: none;
+  }
+}
