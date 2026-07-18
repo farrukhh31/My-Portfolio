@@ -21,6 +21,7 @@ const icons = {
   "game-dev": Gamepad2,
   ai: BrainCircuit,
   "web-dev": GraduationCap,
+  devops: Award,
 };
 
 export default function CertificateCover({

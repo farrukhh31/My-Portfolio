@@ -1,4 +1,3 @@
-
 .hero {
   --cyan: #22d3ee;
   --blue: #3b82f6;
@@ -15,6 +14,7 @@
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-inter, "Inter", sans-serif);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ---------- background layers ---------- */
@@ -606,3 +606,97 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ==================================================
+   LIGHT MODE OVERRIDES
+
+   `.light` is set on <html> by next-themes (global.css
+   step 3-4 from earlier) — it lives outside this CSS
+   Module, so it must be wrapped in :global() to match
+   at runtime. If this file turns out NOT to be a
+   `.module.css` (i.e. it's imported as plain global
+   CSS), drop the `:global(...)` wrapper below and just
+   use `.light .hero { ... }` instead.
+
+   Redefining --cyan/--blue/--violet here automatically
+   re-themes every rule in this file that already reads
+   those variables (.hl, .btnPrimary, .roleBar, .glowMain,
+   .bottomGlow, .statIcon). Everything below that is a
+   literal rgba(255,255,255,*) or #fff — those don't read
+   any variable, so they're overridden explicitly.
+
+   Deliberately left alone: .core, .sphereGrad, .reflect1/2,
+   .ringInner — the orb on the right is a self-contained
+   dark-glass accent element. Keeping it dark in both themes
+   is a design choice (a common "spotlight" motif), not an
+   oversight — it still reads fine floating over a light
+   page. Say the word if you'd rather it fully re-theme too.
+================================================== */
+
+:global(.light) .hero {
+  --cyan: #0891b2;
+  --blue: #2563eb;
+  --violet: #7c3aed;
+  --emerald: #059669;
+  --text: #0f172a;
+  --muted: #475569;
+  --bg: #f8fafc;
+}
+
+/* background grid lines */
+:global(.light) .gridMove {
+  background-image: linear-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+}
+
+/* aurora blobs — softened so they don't overpower a white page */
+:global(.light) .blob1 {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.22), rgba(34, 211, 238, 0.1) 45%, transparent 75%);
+}
+:global(.light) .blob2 {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.09) 45%, transparent 75%);
+}
+:global(.light) .blob3 {
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.14), rgba(59, 130, 246, 0.07) 45%, transparent 75%);
+}
+
+/* greeting pill */
+:global(.light) .pill {
+  border: 1px solid rgba(8, 145, 178, 0.25);
+  background: rgba(15, 23, 42, 0.03);
+  box-shadow: 0 0 35px rgba(8, 145, 178, 0.06);
+}
+:global(.light) .pillText { color: #475569; }
+:global(.light) .pillText b { color: #0f172a; }
+:global(.light) .divider { background: rgba(15, 23, 42, 0.14); }
+:global(.light) .status { color: #059669; }
+
+/* rotating role text */
+:global(.light) .roleText { color: #1e293b; }
+
+/* secondary button needs dark text on its light glass bg —
+   the primary button keeps white text, its bg is always a
+   vivid gradient regardless of theme */
+:global(.light) .btnSecondary {
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  background: rgba(15, 23, 42, 0.03);
+  color: #0f172a;
+}
+
+/* stat cards */
+:global(.light) .stat {
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: rgba(15, 23, 42, 0.03);
+}
+:global(.light) .stat:hover { border-color: rgba(8, 145, 178, 0.35); }
+:global(.light) .statNum { color: #0f172a; }
+
+/* floating tech badges around the orb */
+:global(.light) .badge {
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+/* scroll hint */
+:global(.light) .scrollLabel { color: #64748b; }
+:global(.light) .mouse { border: 1px solid rgba(15, 23, 42, 0.18); }

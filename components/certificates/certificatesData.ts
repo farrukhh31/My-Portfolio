@@ -99,62 +99,125 @@ export const certificates: Certificate[] = [
   },
 
   {
-    id: "meta-frontend",
+  id: "devops",
 
-    title: "Meta Front-End Developer",
+  title: "DevOps and Automation Internship",
 
-    issuer: "Coursera",
+  issuer: "SPS",
 
-    year: "2025",
+  year: "2025",
 
-    category: "web-dev",
+  category: "web-dev",
 
-    status: "completed",
+  status: "completed",
 
-    description:
-      "Comprehensive training covering responsive web development using React, JavaScript, HTML and CSS.",
+  description:
+    "Hands-on DevOps and automation training covering CI/CD pipelines, containerization, version control, Linux environments, and deployment workflows.",
 
-    skills: [
-      "React",
-      "JavaScript",
-      "HTML",
-      "CSS",
-      "Responsive Design",
-    ],
+  skills: [
+    "Linux",
+    "Docker",
+    "Git",
+    "Jenkins",
+    "CI/CD",
+    "Automation",
+    "Cloud Fundamentals",
+  ],
+  image: "/SPS-Internship(certificate).jpg",
 
-    image: "/certificates/meta-frontend.jpg",
+  pdf: "/SPS-Internship(certificate).jpg",
+},
 
-    pdf: "#",
-  },
+{
+  id: "global-game-jam",
+
+  title: "Global Game Jam Competition - 4th Place",
+
+  issuer: "Global Game Jam",
+
+  year: "2026",
+
+  category: "game-dev",
+
+  status: "completed",
+
+  description:
+    "Participated in Global Game Jam and secured 4th place by developing TipToeThief, a creative game project focused on gameplay mechanics, level design, and player experience.",
+
+  skills: [
+    "Unity",
+    "C#",
+    "Game Design",
+    "Gameplay Programming",
+    "Level Design",
+    "Game Development",
+  ],
+
+  image: "/Gamejam-Certificate.jpg",
+
+  pdf: "/Gamejam-Certificate.jpg",
+},
 
   {
-    id: "fullstack",
+  id: "frontend",
 
-    title: "Full Stack Web Development",
+  title: "Frontend Development Internship",
 
-    issuer: "Coursera",
+  issuer: "DevelopersHub",
 
-    year: "2026",
+  year: "2025",
 
-    category: "web-dev",
+  category: "web-dev",
 
-    status: "completed",
+  status: "completed",
 
-    description:
-      "Full-stack application development including backend APIs, databases, authentication and deployment.",
+  description:
+    "Frontend application development focused on responsive UI design, modern JavaScript frameworks, component-based architecture, and building interactive web interfaces.",
 
-    skills: [
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "REST APIs",
-      "Authentication",
-    ],
+  skills: [
+    "React.js",
+    "JavaScript",
+    "HTML5",
+    "CSS3",
+    "Tailwind CSS",
+    "Responsive Design",
+    "UI Development",
+  ],
+  image: "/Dev-Hub(certificate).jpg",
 
-    image: "/certificates/fullstack.jpg",
+  pdf: "/Dev-Hub(certificate).jpg",
+},
+{
+  id: "kda-fullstack",
 
-    pdf: "#",
-  },
+  title: "Full Stack Development Internship",
+
+  issuer: "Karachi Development Authority (KDA)",
+
+  year: "2026",
+
+  category: "web-dev",
+
+  status: "completed",
+
+  description:
+    "Completed a Full Stack Development internship focused on building responsive web applications, developing RESTful APIs, integrating databases, and implementing modern development practices across the frontend and backend.",
+
+  skills: [
+    "React",
+    "Next.js",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "REST APIs",
+    "JavaScript",
+    "Git",
+  ],
+
+  image: "/KDA-certificate.jpeg",
+
+  pdf: "/KDA-certificate.jpeg",
+},
 
   {
     id: "ml-specialization",

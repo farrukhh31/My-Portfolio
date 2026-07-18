@@ -36,9 +36,9 @@ const items = [
 ];
 
 const socials = [
-  { icon: Code, href: "#", label: "GitHub" },
-  { icon: Share2, href: "#", label: "LinkedIn" },
-  { icon: Mail, href: "#contact", label: "Email" },
+  { icon: Code, href: "https://github.com/farrukhh31", label: "GitHub" },
+  { icon: Share2, href: "https://www.linkedin.com/in/farrukh-ahmed-248356246/", label: "LinkedIn" },
+  { icon: Mail, href: "https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=afarrukh553@gmail.com&su=Portfolio%20Inquiry%20for%20Farrukh%20Ahmad", label: "Email" },
 ];
 
 export default function ProfileCard() {

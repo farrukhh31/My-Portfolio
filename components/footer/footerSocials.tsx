@@ -1,57 +1,98 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  FaGithub,
-  FaLinkedin,
-} from "react-icons/fa";
-import {
-  HiOutlineMail,
-  HiOutlineDownload,
-} from "react-icons/hi";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { HiOutlineMail, HiOutlineDownload } from "react-icons/hi";
 
-const socials = [
-  {
-    icon: FaGithub,
-    href: "https://github.com/farrukhh31",
-  },
-  {
-    icon: FaLinkedin,
-    href: "https://www.linkedin.com/in/farrukh-ahmed-248356246/",
-  },
-  {
-    icon: HiOutlineMail,
-    href: "https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=afarrukh553@gmail.com&su=Portfolio%20Inquiry%20for%20Farrukh%20Ahmad",
-  },
-  {
-    icon: HiOutlineDownload,
-    href: "/resume.pdf",
-  },
-];
+import { socials } from "./footerData";
+
+const iconMap = {
+  github: FaGithub,
+  linkedin: FaLinkedin,
+  mail: HiOutlineMail,
+  download: HiOutlineDownload,
+};
+
+function SocialButton({
+  name,
+  href,
+  accent,
+  Icon,
+  download,
+}: {
+  name: string;
+  href: string;
+  accent: string;
+  Icon: React.ComponentType<{ size?: number; className?: string }>;
+  download?: string;
+}) {
+  const [hover, setHover] = useState(false);
+
+  return (
+    <div className="relative flex flex-col items-center">
+      {/* Tooltip */}
+      <motion.span
+        initial={{ opacity: 0, y: 4 }}
+        animate={hover ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
+        transition={{ duration: 0.15 }}
+        className="pointer-events-none absolute -top-9 whitespace-nowrap rounded-md border border-white/10 bg-slate-900/90 px-2.5 py-1 text-xs text-slate-300 backdrop-blur-md"
+      >
+        {name}
+      </motion.span>
+
+      <motion.a
+        href={href}
+        // The download attribute pulls the file straight to disk instead
+        // of navigating — so it must NOT be paired with target="_blank"
+        // (that would open a tab first). Every other link still opens
+        // in a new tab as before.
+        {...(download
+          ? { download }
+          : { target: "_blank", rel: "noopener noreferrer" })}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        whileHover={{
+          y: -8,
+          scale: 1.12,
+        }}
+        whileTap={{ scale: 0.95 }}
+        style={
+          {
+            "--accent": accent,
+          } as React.CSSProperties
+        }
+        className="group glass relative flex h-14 w-14 items-center justify-center rounded-full border border-white/10 transition-colors duration-300 hover:border-[var(--accent)]/50"
+      >
+        <Icon
+          size={22}
+          className="relative z-10 text-slate-300 transition-colors duration-300 group-hover:text-[var(--accent)]"
+        />
+
+        {/* Glow that ramps in on hover, colored per-platform */}
+        <motion.div
+          animate={{ opacity: hover ? 0.55 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="absolute inset-0 rounded-full blur-lg"
+          style={{ background: accent }}
+        />
+      </motion.a>
+    </div>
+  );
+}
 
 export default function FooterSocials() {
   return (
-    <div className="mt-12 flex justify-center gap-5">
-      {socials.map(({ icon: Icon, href }, i) => (
-        <motion.a
-          key={i}
-          href={href}
-          target="_blank"
-          whileHover={{
-            y: -8,
-            scale: 1.12,
-            rotate: 8,
-          }}
-          whileTap={{
-            scale: 0.95,
-          }}
-          className="glass flex h-14 w-14 items-center justify-center rounded-full border border-white/10 transition hover:border-cyan-400/40 hover:shadow-[0_0_40px_rgba(34,211,238,.35)]"
-        >
-          <Icon
-            size={22}
-            className="text-cyan-300"
-          />
-        </motion.a>
+    <div className="mt-12 flex justify-center gap-6">
+      {socials.map((s) => (
+        <SocialButton
+          key={s.name}
+          name={s.name}
+          href={s.href}
+          accent={s.accent}
+          Icon={iconMap[s.icon as keyof typeof iconMap]}
+          download={s.download}
+        />
       ))}
     </div>
   );

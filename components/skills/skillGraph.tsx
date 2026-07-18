@@ -1,163 +1,123 @@
 "use client";
 
-import { useMemo } from "react";
-import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 
-import { Skill, SkillCategory } from "./types";
-import SkillNode from "./skillNode";
-import SkillConnections from "./skillConnection";
-import useParallax from "@/hooks/useParallax";
+import { useWebglSupport } from "@/hooks/useWebglSupport";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+
+import { CategoryFilter, Skill } from "./types";
+import { CATEGORY_ORDER, categoryColor } from "./categoryTheme";
+import SkillsFallbackGrid from "./skillsFallbackGrid";
+
+// The 3D scene touches the WebGL canvas/DOM directly, so it must never be
+// part of the server-rendered HTML — next/dynamic with ssr:false handles that.
+const SkillsScene = dynamic(() => import("./skillsScene"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full w-full items-center justify-center text-sm text-slate-500">
+      Loading 3D skill graph…
+    </div>
+  ),
+});
 
 type Props = {
   skills: Skill[];
+  category: CategoryFilter;
   selectedSkill: Skill;
   setSelectedSkill: (skill: Skill) => void;
-  category: SkillCategory;
 };
 
 export default function SkillGraph({
   skills,
+  category,
   selectedSkill,
   setSelectedSkill,
-  category,
 }: Props) {
-  const offset = useParallax();
+  const webglSupported = useWebglSupport();
+  const reducedMotion = useReducedMotion();
+  const isCompact = useMediaQuery("(max-width: 768px)");
 
-  const filtered =
+  const fallbackSkills =
     category === "All"
       ? skills
       : skills.filter((skill) => skill.category === category);
 
-  // Generate stars only once
-  const stars = useMemo(
-    () =>
-      Array.from({ length: 40 }, (_, i) => ({
-        id: i,
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        size: Math.random() * 3 + 1,
-        duration: Math.random() * 3 + 2,
-        delay: Math.random() * 2,
-      })),
-    []
+  const activeCategories = CATEGORY_ORDER.filter((cat) =>
+    skills.some((skill) => skill.category === cat)
   );
 
   return (
-    <motion.div
-      animate={{
-        x: offset.x,
-        y: offset.y,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 80,
-        damping: 25,
-      }}
+    <div
+      role="img"
+      aria-label="Interactive 3D constellation of skills, grouped and color-coded by discipline"
       className="glass relative h-[600px] overflow-hidden rounded-3xl border border-white/10 bg-slate-950/40 backdrop-blur-xl lg:h-[700px]"
     >
-      {/* ================= Background ================= */}
+      {/* ================= Background atmosphere ================= */}
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,.12),transparent_70%)]" />
 
-      {/* ================= Animated Nebula ================= */}
+      <div className="pointer-events-none absolute left-10 top-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-[120px]" />
+      <div className="pointer-events-none absolute right-10 top-20 h-80 w-80 rounded-full bg-violet-500/10 blur-[140px]" />
+      <div className="pointer-events-none absolute bottom-10 left-1/3 h-64 w-64 rounded-full bg-sky-500/10 blur-[120px]" />
 
-      <motion.div
-        animate={{
-          x: [-30, 30, -30],
-          y: [0, 25, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute left-10 top-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-[120px]"
-      />
+      {/* ================= 3D scene, or graceful fallback ================= */}
 
-      <motion.div
-        animate={{
-          x: [20, -20, 20],
-          y: [20, -20, 20],
-          scale: [1.1, 0.9, 1.1],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute right-10 top-20 h-80 w-80 rounded-full bg-violet-500/10 blur-[140px]"
-      />
-
-      <motion.div
-        animate={{
-          x: [0, 30, 0],
-          y: [-20, 20, -20],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-10 left-1/3 h-64 w-64 rounded-full bg-sky-500/10 blur-[120px]"
-      />
-
-      {/* ================= Stars ================= */}
-
-      {stars.map((star) => (
-        <motion.div
-          key={star.id}
-          animate={{
-            opacity: [0.2, 1, 0.2],
-            scale: [1, 1.6, 1],
-          }}
-          transition={{
-            duration: star.duration,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: star.delay,
-          }}
-          style={{
-            left: `${star.left}%`,
-            top: `${star.top}%`,
-            width: star.size,
-            height: star.size,
-          }}
-          className="absolute rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(34,211,238,.8)]"
+      {webglSupported ? (
+        <SkillsScene
+          skills={skills}
+          category={category}
+          selectedSkill={selectedSkill}
+          onSelect={setSelectedSkill}
+          reducedMotion={reducedMotion}
+          allowDrag={!isCompact}
+          starCount={isCompact ? 500 : 1100}
         />
-      ))}
-
-      {/* ================= Connection Lines ================= */}
-
-      <SkillConnections
-        skills={filtered}
-        selectedSkill={selectedSkill}
-      />
-
-      {/* ================= Skill Nodes ================= */}
-
-      {filtered.map((skill) => (
-        <SkillNode
-          key={skill.id}
-          skill={skill}
-          selected={selectedSkill.id === skill.id}
-          onClick={() => setSelectedSkill(skill)}
-        />
-      ))}
-
-      {/* ================= Empty State ================= */}
-
-      {filtered.length === 0 && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <p className="text-slate-500">
-            No skills found in this category.
-          </p>
+      ) : (
+        <div className="h-full overflow-y-auto p-6">
+          <SkillsFallbackGrid
+            skills={fallbackSkills}
+            selectedSkill={selectedSkill}
+            onSelect={setSelectedSkill}
+          />
         </div>
       )}
 
-      {/* ================= Bottom Glow ================= */}
+      {/* ================= HUD chrome ================= */}
+
+      <CornerBrackets />
+
+      <div className="pointer-events-none absolute left-8 top-7 flex flex-wrap gap-x-4 gap-y-2 text-[11px] uppercase tracking-wider text-slate-400">
+        {activeCategories.map((cat) => (
+          <span key={cat} className="flex items-center gap-1.5">
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ background: categoryColor(cat) }}
+            />
+            {cat}
+          </span>
+        ))}
+      </div>
+
+      {webglSupported && (
+        <p className="pointer-events-none absolute bottom-5 right-5 text-[11px] text-slate-500">
+          {isCompact ? "Tap a node to explore" : "Drag to rotate · Click a node to explore"}
+        </p>
+      )}
 
       <div className="pointer-events-none absolute bottom-0 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px]" />
-    </motion.div>
+    </div>
+  );
+}
+
+function CornerBrackets() {
+  const common = "pointer-events-none absolute h-7 w-7 border-cyan-400/50";
+  return (
+    <>
+      <span className={`${common} left-3 top-3 border-l-2 border-t-2`} />
+      <span className={`${common} right-3 top-3 border-r-2 border-t-2`} />
+      <span className={`${common} bottom-3 left-3 border-b-2 border-l-2`} />
+      <span className={`${common} bottom-3 right-3 border-b-2 border-r-2`} />
+    </>
   );
 }

@@ -58,10 +58,6 @@ export default function Certificates() {
     useState(false);
 
 
-  const [paused, setPaused] =
-    useState(false);
-
-
   const touchStart =
     useRef<number | null>(null);
 
@@ -157,31 +153,9 @@ export default function Certificates() {
 
 
 
-  // Auto Play
-
-  useEffect(() => {
-
-    if(paused)
-      return;
-
-
-    const timer =
-      setInterval(() => {
-
-        next();
-
-      },5000);
-
-
-
-    return () =>
-      clearInterval(timer);
-
-
-  },[
-    paused,
-    filtered
-  ]);
+  // Auto Play removed: the certificate now only changes when the user
+  // explicitly triggers next/previous (via click, keyboard arrows, or
+  // swipe) — no more automatic interval-driven advancing.
 
 
 
@@ -222,19 +196,6 @@ export default function Certificates() {
 
         case "End":
           goEnd();
-          break;
-
-
-        case " ":
-          e.preventDefault();
-          setPaused(
-            prev=>!prev
-          );
-          break;
-
-
-        case "Escape":
-          setPaused(false);
           break;
 
 
@@ -460,23 +421,10 @@ filter===item.value
 
 {item.label}
 
-</button>
-
-
-))
+</button>))
 }
-
-
 </div>
-
-
-
-
-
-
 <div
-onMouseEnter={()=>setPaused(true)}
-onMouseLeave={()=>setPaused(false)}
 onTouchStart={handleTouchStart}
 onTouchEnd={handleTouchEnd}
 

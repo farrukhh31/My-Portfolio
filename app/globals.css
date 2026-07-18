@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* stylelint-disable-next-line at-rule-no-unknown */
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+
 /* ==================================================
    Root Variables
 ================================================== */
@@ -21,6 +24,26 @@
 
   --glow:
     rgba(34,211,238,0.25);
+}
+
+
+.light {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --primary: #22d3ee;
+  --secondary: #8b5cf6;
+
+  --muted: #475569;
+
+  --glass: rgba(15,23,42,0.04);
+  --glass-border: rgba(15,23,42,0.08);
+
+  --shadow:
+    0 30px 80px rgba(0,0,0,0.08);
+
+  --glow:
+    rgba(34,211,238,0.15);
 }
 
 
@@ -61,6 +84,10 @@ body {
   font-feature-settings:
     "ss01" on,
     "cv01" on;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 
 }
 
@@ -105,7 +132,7 @@ img {
 
 ::-webkit-scrollbar-track {
 
-  background:#030712;
+  background:var(--background);
 
 }
 
@@ -135,7 +162,7 @@ img {
 
   scrollbar-width:thin;
 
-  scrollbar-color:#334155 #030712;
+  scrollbar-color:#334155 var(--background);
 
 }
 
@@ -183,6 +210,24 @@ body::before {
       black 20%,
       transparent 90%
     );
+
+}
+
+
+.light body::before {
+
+  background-image:
+
+  linear-gradient(
+    rgba(15,23,42,.05) 1px,
+    transparent 1px
+  ),
+
+  linear-gradient(
+    90deg,
+    rgba(15,23,42,.05) 1px,
+    transparent 1px
+  );
 
 }
 

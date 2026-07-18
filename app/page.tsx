@@ -1,9 +1,9 @@
-import Navbar from "@/components/layout/navbar";
+import Navbar from "@/components/Navbar/navbar";
 import Hero from "@/components/hero/Hero";
-import About1 from "@/components/About1/About";
-import Project1 from "@/components/Projects1/Projects";
+import About from "@/components/About/About";
+import Project from "@/components/Projects/Projects";
 import Experience from "@/components/Experience/experience";
-import Skills from "@/components/skills/Skills";
+import Skills from "@/components/Skills/Skills";
 import Certificates from "@/components/certificates/Certificates";
 import Recruiters from "@/components/RecruiterSnapshot/RecruiterSnapshot";
 import Contact from "@/components/contact/contact";
@@ -15,11 +15,10 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Recruiters/>
-      <About1 />
-      {/* <Projects /> */}
-      <Project1 />
-      <Experience />
+      <About />
       <Skills />
+      <Project />
+      <Experience />
       <Certificates />
       <Contact />
       <Footer />

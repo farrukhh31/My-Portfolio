@@ -1,7 +1,7 @@
 export type CertificateCategory =
   | "game-dev"
   | "ai"
-  | "web-dev";
+  | "web-dev"
 
 export type CertificateStatus =
   | "completed"

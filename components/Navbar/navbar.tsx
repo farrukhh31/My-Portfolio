@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -16,6 +15,8 @@ import MouseSpotlight from "./Spotlight";
 import CommandPalette from "./commandPalette";
 import ResumeCard from "./ResumeCard";
 import LiveClock from "./LiveClock";
+import ThemeToggle from "./ThemeToggle";
+import ViewSource from "./ViewSource";
 
 const navItems = [
   { name: "Recruiter", id: "hero" },
@@ -134,8 +135,8 @@ export default function Navbar() {
           -translate-x-1/2
           z-50
 
-          w-[92%]
-          max-w-7xl
+          w-[95%]
+          max-w-[1400px]
 
           rounded-3xl
 
@@ -148,8 +149,12 @@ export default function Navbar() {
 
           shadow-[0_20px_80px_rgba(0,0,0,0.45)]
 
-          px-6
+          overflow-x-clip
+
+          px-4
           py-3
+
+          lg:px-6
         "
       >
         <div className="flex items-center justify-between">
@@ -159,13 +164,14 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => scrollToSection("hero")}
-            className="flex items-center gap-3 cursor-pointer"
+            className="flex shrink-0 items-center gap-3 cursor-pointer"
           >
             <div
               className="
                 flex
                 h-11
                 w-11
+                shrink-0
                 items-center
                 justify-center
 
@@ -197,7 +203,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
 
-          <div className="relative hidden items-center gap-1 md:flex">
+          <div className="relative hidden items-center gap-1 lg:flex">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -254,10 +260,20 @@ export default function Navbar() {
 
           {/* Right Side */}
 
-          <div className="hidden items-center gap-4 md:flex">
-            <LiveClock />
+          <div className="hidden items-center gap-1.5 lg:flex xl:gap-2 2xl:gap-3">
+            <div className="shrink-0">
+              <LiveClock />
+            </div>
 
-            <div className="relative group">
+            <div className="shrink-0">
+              <ViewSource />
+            </div>
+
+            <div className="shrink-0">
+              <ThemeToggle />
+            </div>
+
+            <div className="relative shrink-0 group">
               <button
                 type="button"
                 className="
@@ -301,6 +317,7 @@ export default function Navbar() {
                 group
 
                 flex
+                shrink-0
                 items-center
                 gap-2
 
@@ -311,7 +328,7 @@ export default function Navbar() {
 
                 bg-white/[0.04]
 
-                px-4
+                px-3
                 py-2
 
                 text-sm
@@ -323,6 +340,8 @@ export default function Navbar() {
                 hover:border-purple-500/40
                 hover:bg-purple-500/10
                 hover:text-white
+
+                2xl:px-4
               "
             >
               <Command
@@ -334,7 +353,7 @@ export default function Navbar() {
                   group-hover:rotate-12
                 "
               />
-              Ctrl + K
+              <span className="hidden 2xl:inline">Ctrl + K</span>
             </button>
 
             {/* Scroll Percentage */}
@@ -342,6 +361,9 @@ export default function Navbar() {
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="
+                hidden
+                shrink-0
+
                 rounded-full
 
                 border
@@ -356,6 +378,8 @@ export default function Navbar() {
                 font-semibold
 
                 text-zinc-400
+
+                2xl:block
               "
             >
               {scrollPercent}%
@@ -379,7 +403,7 @@ export default function Navbar() {
 
               hover:bg-white/10
 
-              md:hidden
+              lg:hidden
             "
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -405,7 +429,7 @@ export default function Navbar() {
 
                 pt-5
 
-                md:hidden
+                lg:hidden
               "
             >
               <div className="flex flex-col gap-2">
@@ -437,8 +461,13 @@ export default function Navbar() {
                   </button>
                 ))}
 
-                <div className="mt-4">
+                <div className="mt-4 flex items-center justify-between gap-3">
                   <LiveClock />
+
+                  <div className="flex items-center gap-3">
+                    <ViewSource />
+                    <ThemeToggle />
+                  </div>
                 </div>
 
                 <button
