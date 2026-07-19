@@ -3,7 +3,7 @@
 A modern, interactive, and responsive personal portfolio website built to showcase my journey as a **Full Stack Developer & Game Developer**.  
 The portfolio focuses on premium UI/UX, smooth animations, 3D-inspired visuals, and an engaging user experience.
 
-🌐 **Live Website:** [farrukh.dev](#)  
+🌐 **Live Website:** [[farrukh.dev](#) ](https://my-portfolio-tdj6.vercel.app/) 
 📂 **GitHub Repository:** https://github.com/farrukhh31/My-Portfolio
 
 ---
