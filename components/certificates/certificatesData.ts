@@ -91,11 +91,11 @@ export const certificates: Certificate[] = [
       "Automation",
     ],
 
-    image: "/certificates/aspire-ai.jpg",
+    image: "/Aspire-certificate.jpg",
 
-    pdf: "#",
+    pdf: "/Aspire-certificate.jpg",
 
-    credentialId: "ASP-GENAI-2025",
+    credentialId: "58015daa0b2f39fa",
   },
 
   {

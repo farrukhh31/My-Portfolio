@@ -19,7 +19,7 @@ import ThemeToggle from "./ThemeToggle";
 import ViewSource from "./ViewSource";
 
 const navItems = [
-  { name: "Recruiter", id: "hero" },
+  { name: "Recruiter", id: "Recruiter" },
   { name: "About", id: "about" },
   { name: "Projects", id: "projects" },
   { name: "Skills", id: "skills" },
@@ -125,14 +125,13 @@ export default function Navbar() {
 
       <motion.nav
         ref={menuRef}
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{ y: -80, opacity: 0, x: "-50%" }}
+        animate={{ y: 0, opacity: 1, x: "-50%" }}
         transition={{ duration: 0.6 }}
         className="
           fixed
           top-5
           left-1/2
-          -translate-x-1/2
           z-50
 
           w-[95%]

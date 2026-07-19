@@ -10,15 +10,8 @@ export type Project = {
   category: ProjectCategory;
   github?: string;
 
-  // A publicly hosted, clickable live demo. Leave empty ("" or omit)
-  // for projects that can't be deployed for public access (games,
-  // internal tools, infra) — use `video` instead.
   demo?: string;
 
-  // A recorded walkthrough: a YouTube/Vimeo embed URL
-  // (https://www.youtube.com/embed/VIDEO_ID) or a direct .mp4 file.
-  // When present, the card shows a "Watch Gameplay" / "Watch Demo"
-  // button that opens an in-page video modal instead of a dead link.
   video?: string;
   videoLabel?: string;
 
@@ -26,26 +19,33 @@ export type Project = {
 };
 
 export const Projects: Project[] = [
-  {
-    title: "Employee Task Management System",
-    description:
-      "A full-stack task management application with authentication, dashboards, role-based access, and real-time project management.",
+ {
+  title: "Developer Portfolio",
 
-    image: "/projects/taskmanager.png",
-    hoverImage: "/projects/taskmanager-hover.png",
+  description:
+    "A modern, interactive portfolio showcasing my projects, skills, certifications, and experience with premium animations, responsive design, and an engaging user experience.",
 
-    highlight:
-      "Cut manual status updates by automating task assignment and progress tracking across teams.",
+  image: "/images/portfolio.PNG",
+  hoverImage: "/images/portfolio-hover.PNG",
 
-    technologies: ["React", "Node.js", "MongoDB", "Express", "Docker"],
+  highlight:
+    "Designed to create a memorable first impression with smooth animations, dark/light mode, and an immersive UI that highlights my work effectively.",
 
-    category: "webdev",
+  technologies: [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Framer Motion"
+  ],
 
-    github: "#",
-    demo: "#",
+  category: "webdev",
 
-    featured: true,
-  },
+  github: "https://github.com/farrukhh31/My-Portfolio",
+  demo: "https://your-portfolio-url.com",
+
+  featured: true,
+},
 
   {
     title: "Unity Survival Game",
@@ -71,28 +71,31 @@ export const Projects: Project[] = [
   },
 
   {
-    title: "Automated Cloud Deployment Pipeline",
-    description:
-      "A CI/CD pipeline that builds, tests, containerizes, and deploys services to the cloud on every push, with zero-downtime rollouts.",
+  title: "Frontend Development Projects",
 
-    image: "/projects/devops.png",
-    hoverImage: "/projects/devops-hover.png",
+  description:
+    "A collection of responsive and interactive frontend applications built with modern web technologies, focusing on clean UI, smooth user experience, and performance.",
 
-    highlight:
-      "Cut deployment time from a manual half-day process to an automated, monitored rollout in minutes.",
+  image: "/images/frontend.png",
+  hoverImage: "/images/frontend-hover.png",
 
-    technologies: ["Docker", "Kubernetes", "GitHub Actions", "Terraform", "AWS"],
+  highlight:
+    "Developed modern, responsive interfaces with reusable components, interactive animations, and optimized performance across desktop and mobile devices.",
 
-    category: "devops",
+  technologies: [
+    "TypeScript",
+    "JavaScript",
+    "HTML5",
+    "CSS3"
+  ],
 
-    github: "#",
-    // Infra work has no public URL to demo — a screen recording of the
-    // pipeline running end-to-end instead.
-    video: "https://www.youtube.com/embed/REPLACE_WITH_VIDEO_ID",
-    videoLabel: "Watch Pipeline Demo",
+  category: "webdev",
 
-    featured: true,
-  },
+  github: "https://github.com/farrukhh31/ITVE-Assessment-Frontend-Development-",
+  demo: "https://itve-assessment-frontend-n8pa.vercel.app/",
+
+  featured: true,
+},
 
   {
     title: "AI-Powered Document Q&A System",

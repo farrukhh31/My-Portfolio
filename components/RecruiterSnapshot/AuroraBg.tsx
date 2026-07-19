@@ -23,17 +23,11 @@ export default function AuroraBackground() {
   return (
     <motion.div
       style={{ y: auroraY }}
-      className="absolute inset-0 overflow-hidden rounded-[2rem] pointer-events-none"
+      className="absolute inset-0 overflow-hidden rounded-4xl pointer-events-none"
     >
 
       {/* Base Background */}
-      <div
-        className="
-        absolute inset-0
-        bg-[radial-gradient(circle_at_top,#e0f2fe_0%,#f8fafc_40%,#ffffff_100%)]
-        dark:bg-[radial-gradient(circle_at_top,#07192d_0%,#050914_35%,#02040d_100%)]
-        "
-      />
+      <div className="absolute inset-0 aurora-bg-base" />
 
 
       {/* Spotlight */}
@@ -50,13 +44,12 @@ export default function AuroraBackground() {
         className="
         absolute
         left-1/2
-        top-[-350px]
-        h-[950px]
-        w-[950px]
+        -top-87.5
+        h-237.5
+        w-237.5
         -translate-x-1/2
         rounded-full
-        bg-cyan-400/20
-        dark:bg-cyan-400/10
+        aurora-spotlight
         blur-[240px]
         "
       />
@@ -79,11 +72,10 @@ export default function AuroraBackground() {
         absolute
         -left-60
         -top-52
-        h-[700px]
-        w-[700px]
+        h-175
+        w-175
         rounded-full
-        bg-cyan-400/20
-        dark:bg-cyan-400/18
+        aurora-cyan
         blur-[200px]
         "
       />
@@ -106,11 +98,10 @@ export default function AuroraBackground() {
         absolute
         -right-60
         top-20
-        h-[650px]
-        w-[650px]
+        h-162.5
+        w-162.5
         rounded-full
-        bg-sky-500/18
-        dark:bg-sky-500/14
+        aurora-blue
         blur-[190px]
         "
       />
@@ -130,13 +121,12 @@ export default function AuroraBackground() {
         }}
         className="
         absolute
-        bottom-[-240px]
+        -bottom-60
         left-1/3
-        h-[520px]
-        w-[520px]
+        h-130
+        w-130
         rounded-full
-        bg-blue-500/15
-        dark:bg-blue-600/12
+        aurora-bottom-glow
         blur-[190px]
         "
       />
@@ -157,11 +147,10 @@ export default function AuroraBackground() {
         absolute
         right-1/4
         top-1/3
-        h-[260px]
-        w-[260px]
+        h-65
+        w-65
         rounded-full
-        bg-violet-500/10
-        dark:bg-violet-500/5
+        aurora-purple
         blur-[140px]
         "
       />
@@ -182,12 +171,7 @@ export default function AuroraBackground() {
           repeat:Infinity,
           ease:"linear",
         }}
-        className="
-        absolute inset-0
-        opacity-[0.15]
-        dark:opacity-[0.12]
-        bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,.18),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(59,130,246,.16),transparent_45%),radial-gradient(circle_at_40%_80%,rgba(6,182,212,.14),transparent_35%)]
-        "
+        className="absolute inset-0 aurora-mesh"
       />
 
 
@@ -204,39 +188,19 @@ export default function AuroraBackground() {
           repeat:Infinity,
           ease:"linear",
         }}
-        className="
-        absolute inset-0
-        opacity-[0.08]
-        dark:opacity-[0.05]
-        bg-[linear-gradient(rgba(34,211,238,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,.08)_1px,transparent_1px)]
-        bg-[size:40px_40px]
-        "
+        className="absolute inset-0 aurora-grid"
       />
 
 
       {/* Noise */}
-      <div
-        className="
-        absolute inset-0
-        opacity-[0.02]
-        dark:opacity-[0.025]
-        mix-blend-overlay
-        [background-image:radial-gradient(rgba(0,0,0,.5)_0.8px,transparent_0.8px)]
-        dark:[background-image:radial-gradient(rgba(255,255,255,.8)_0.8px,transparent_0.8px)]
-        [background-size:8px_8px]
-        "
-      />
+      <div className="absolute inset-0 aurora-noise" />
 
 
       {/* Stars */}
       {stars.map((star,index)=>(
         <motion.div
           key={index}
-          className="
-          absolute rounded-full
-          bg-sky-500
-          dark:bg-cyan-300
-          "
+          className="absolute rounded-full aurora-star"
           style={{
             width:star.size,
             height:star.size,
@@ -257,13 +221,7 @@ export default function AuroraBackground() {
 
 
       {/* Vignette */}
-      <div
-        className="
-        absolute inset-0
-        bg-[radial-gradient(circle,transparent_55%,rgba(255,255,255,.18)_100%)]
-        dark:bg-[radial-gradient(circle,transparent_45%,rgba(2,4,13,.65)_100%)]
-        "
-      />
+      <div className="absolute inset-0 aurora-vignette" />
 
     </motion.div>
   );

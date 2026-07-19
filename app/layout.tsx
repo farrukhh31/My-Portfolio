@@ -9,6 +9,7 @@ import { LaunchScreen } from "@/components/Launch";
 import RouteTransition from "@/components/hero/transitions/RouteTransition";
 import RouteProgressBar from "@/components/hero/transitions/RouteProgressBar";
 
+import Navbar from "@/components/Navbar/navbar";
 import ScrollProgress from "@/components/Navbar/ScrollProgress";
 import ScrollIndicator from "@/components/ScrollIndicator";
 
@@ -78,6 +79,9 @@ export default function RootLayout({
           <ScrollProgress />
 
           <ScrollIndicator />
+
+          {/* Persistent, fixed nav — must stay OUTSIDE RouteTransition/SmoothScroll */}
+          <Navbar />
 
 
           {/* Loading Layers */}

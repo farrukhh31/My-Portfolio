@@ -32,8 +32,8 @@ export const navigation: NavItem[] = [
     shortcut: "G A",
   },
   {
-    id: "snapshot",
-    title: "Recruiter Snapshot",
+    id: "Recruiter",
+    title: "Recruiter",
     icon: Briefcase,
   },
   {
