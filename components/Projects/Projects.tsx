@@ -1,12 +1,16 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 import { Projects } from "./Projects-s";
-import { categoryConfig, categoryOrder, ProjectCategory } from "./project-categories";
+import {
+  categoryConfig,
+  categoryOrder,
+  ProjectCategory,
+} from "./project-categories";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
@@ -15,17 +19,26 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
+const itemVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
   },
   exit: {
     opacity: 0,
     y: -20,
-    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+    transition: {
+      duration: 0.3,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
   },
 };
 
@@ -70,7 +83,6 @@ export default function Projectss() {
         </p>
       </motion.div>
 
-      {/* Filter pills */}
       <motion.div
         className="mb-14 flex flex-wrap items-center justify-center gap-3"
         initial={{ opacity: 0, y: 10 }}
@@ -84,6 +96,7 @@ export default function Projectss() {
           active={filter === "all"}
           onClick={() => setFilter("all")}
         />
+
         {availableCategories.map((cat) => (
           <FilterPill
             key={cat}
@@ -105,7 +118,11 @@ export default function Projectss() {
       >
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, index) => (
-            <motion.div key={project.title} variants={itemVariants} layout>
+            <motion.div
+              key={project.title}
+              variants={itemVariants}
+              layout
+            >
               <ProjectCard project={project} index={index} />
             </motion.div>
           ))}
@@ -150,8 +167,11 @@ function FilterPill({
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
         />
       )}
+
       <span className="relative z-10 flex items-center gap-2">
-        {dotClass && <span className={`h-1.5 w-1.5 rounded-full ${dotClass}`} />}
+        {dotClass && (
+          <span className={`h-1.5 w-1.5 rounded-full ${dotClass}`} />
+        )}
         {label}
         <span className="text-xs text-slate-500">{count}</span>
       </span>
