@@ -24,6 +24,17 @@ export default function CommandPalette({
     }
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
   const handleSelect = (id: string) => {
     switch (id) {
       case "about":
@@ -73,11 +84,37 @@ export default function CommandPalette({
         alert("Email copied to clipboard!");
         break;
 
-      case "sudo":
+      case "sudo": {
+        // NEXT_PUBLIC_FORMSPREE_FORM_ID is a form endpoint id, not a secret —
+        // Formspree's client-side submission model expects it to be public,
+        // same as any <form action="https://formspree.io/f/...">.
+        const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
+
+        if (formId) {
+          fetch(`https://formspree.io/f/${formId}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              _subject: "🔓 Someone ran 'sudo hire' on your portfolio",
+              message:
+                "A visitor just triggered the sudo easter egg in your command palette.",
+              page: window.location.href,
+              triggeredAt: new Date().toISOString(),
+            }),
+          }).catch(() => {
+            // Best-effort notification only — don't let a failed request
+            // surface an error to the visitor triggering the easter egg.
+          });
+        }
+
         alert(
           "🔓 Access Granted\n\nWelcome Recruiter 🙂\n\nLet's build something amazing."
         );
         break;
+      }
     }
 
     onClose();
@@ -88,7 +125,7 @@ export default function CommandPalette({
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[100] flex items-start justify-center bg-black/50 backdrop-blur-sm"
+        className="fixed inset-0 z-100 flex items-start justify-center overflow-y-auto bg-black/50 px-4 py-[10vh] backdrop-blur-sm sm:py-24"
         initial={{
           opacity: 0,
         }}
@@ -121,7 +158,6 @@ export default function CommandPalette({
           }}
           onClick={(e) => e.stopPropagation()}
           className="
-            mt-24
             w-full
             max-w-2xl
             overflow-hidden

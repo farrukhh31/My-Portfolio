@@ -21,7 +21,7 @@ export default function SkillStats({ skills }: Props) {
   ];
 
   return (
-    <div className="mb-10 flex flex-wrap justify-center gap-4">
+    <div className="mb-8 flex flex-wrap justify-center gap-3 sm:mb-10 sm:gap-4">
       {stats.map((stat, i) => (
         <motion.div
           key={stat.label}
@@ -29,10 +29,10 @@ export default function SkillStats({ skills }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: i * 0.05 }}
-          className="glass rounded-2xl border border-white/10 px-5 py-3 text-center"
+          className="glass rounded-xl border border-white/10 px-4 py-2.5 text-center sm:rounded-2xl sm:px-5 sm:py-3"
         >
-          <p className="text-2xl font-black text-white">{stat.value}</p>
-          <p className="text-xs uppercase tracking-wider text-slate-400">
+          <p className="text-xl font-black text-white sm:text-2xl">{stat.value}</p>
+          <p className="text-[10px] uppercase tracking-wider text-slate-400 sm:text-xs">
             {stat.label}
           </p>
         </motion.div>

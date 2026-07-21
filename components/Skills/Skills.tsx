@@ -17,16 +17,16 @@ export default function Skills() {
 
   return (
     <section id="skills" className="container-width section-padding">
-      <div className="mb-12 text-center">
-        <p className="uppercase tracking-[0.35em] text-cyan-400">
+      <div className="mb-8 text-center sm:mb-12">
+        <p className="text-xs uppercase tracking-[0.25em] text-cyan-400 sm:text-sm sm:tracking-[0.35em]">
           Engineering Stack
         </p>
 
-        <h2 className="mt-4 text-5xl font-black text-white">
+        <h2 className="mt-3 text-3xl font-black text-white sm:mt-4 sm:text-4xl lg:text-5xl">
           Interactive Skill Map
         </h2>
 
-        <p className="mx-auto mt-6 max-w-3xl text-slate-400">
+        <p className="mx-auto mt-4 max-w-3xl px-2 text-sm text-slate-400 sm:mt-6 sm:px-0 sm:text-base">
           Every technology here represents something I&apos;ve built,
           explored, or used in real-world projects — arranged as a live
           3D constellation, grouped and color-coded by discipline.
@@ -41,7 +41,10 @@ export default function Skills() {
         onChange={setCategory}
       />
 
-      <div className="mt-14 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
+      {/* Below xl the detail panel gets its own full-width row instead of
+          being squeezed beside the graph — keeps both legible on tablets
+          and small laptops. */}
+      <div className="mt-10 grid gap-6 sm:mt-14 sm:gap-8 xl:grid-cols-[1.5fr_1fr] xl:gap-10">
         <SkillGraph
           skills={skills}
           category={category}

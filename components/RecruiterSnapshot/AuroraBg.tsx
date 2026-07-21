@@ -45,12 +45,16 @@ export default function AuroraBackground() {
         absolute
         left-1/2
         -top-87.5
-        h-237.5
-        w-237.5
+        h-100
+        w-100
+        sm:h-237.5
+        sm:w-237.5
         -translate-x-1/2
         rounded-full
         aurora-spotlight
-        blur-[240px]
+        blur-[120px]
+        sm:blur-[240px]
+        motion-reduce:animate-none
         "
       />
 
@@ -72,11 +76,14 @@ export default function AuroraBackground() {
         absolute
         -left-60
         -top-52
-        h-175
-        w-175
+        h-90
+        w-90
+        sm:h-175
+        sm:w-175
         rounded-full
         aurora-cyan
-        blur-[200px]
+        blur-[100px]
+        sm:blur-[200px]
         "
       />
 
@@ -95,6 +102,8 @@ export default function AuroraBackground() {
           ease: "easeInOut",
         }}
         className="
+        hidden
+        sm:block
         absolute
         -right-60
         top-20
@@ -120,6 +129,8 @@ export default function AuroraBackground() {
           ease: "easeInOut",
         }}
         className="
+        hidden
+        sm:block
         absolute
         -bottom-60
         left-1/3
@@ -144,6 +155,8 @@ export default function AuroraBackground() {
           ease: "easeInOut",
         }}
         className="
+        hidden
+        md:block
         absolute
         right-1/4
         top-1/3
@@ -171,7 +184,7 @@ export default function AuroraBackground() {
           repeat:Infinity,
           ease:"linear",
         }}
-        className="absolute inset-0 aurora-mesh"
+        className="hidden md:block absolute inset-0 aurora-mesh"
       />
 
 
@@ -188,7 +201,7 @@ export default function AuroraBackground() {
           repeat:Infinity,
           ease:"linear",
         }}
-        className="absolute inset-0 aurora-grid"
+        className="hidden sm:block absolute inset-0 aurora-grid"
       />
 
 
@@ -196,28 +209,30 @@ export default function AuroraBackground() {
       <div className="absolute inset-0 aurora-noise" />
 
 
-      {/* Stars */}
-      {stars.map((star,index)=>(
-        <motion.div
-          key={index}
-          className="absolute rounded-full aurora-star"
-          style={{
-            width:star.size,
-            height:star.size,
-            left:`${star.left}%`,
-            top:`${star.top}%`,
-          }}
-          animate={{
-            opacity:[0.2,1,0.2],
-            scale:[1,1.8,1],
-          }}
-          transition={{
-            duration:star.duration,
-            delay:star.delay,
-            repeat:Infinity,
-          }}
-        />
-      ))}
+      {/* Stars — decorative twinkle layer, skipped on mobile to keep scrolling smooth */}
+      <div className="hidden sm:block">
+        {stars.map((star,index)=>(
+          <motion.div
+            key={index}
+            className="absolute rounded-full aurora-star"
+            style={{
+              width:star.size,
+              height:star.size,
+              left:`${star.left}%`,
+              top:`${star.top}%`,
+            }}
+            animate={{
+              opacity:[0.2,1,0.2],
+              scale:[1,1.8,1],
+            }}
+            transition={{
+              duration:star.duration,
+              delay:star.delay,
+              repeat:Infinity,
+            }}
+          />
+        ))}
+      </div>
 
 
       {/* Vignette */}

@@ -1,8 +1,9 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 
-export default function BackgroundFX() {
+function BackgroundFX() {
   return (
     <>
       {/* Base Gradient */}
@@ -26,7 +27,7 @@ export default function BackgroundFX() {
 
           bg-[linear-gradient(rgba(255,255,255,.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.03)_1px,transparent_1px)]
 
-          bg-[size:80px_80px]
+          bg-size-[80px_80px]
         "
       />
 
@@ -50,7 +51,7 @@ export default function BackgroundFX() {
           h-40
           w-full
 
-          bg-gradient-to-b
+          bg-linear-to-b
           from-transparent
           via-cyan-400/10
           to-transparent
@@ -74,8 +75,10 @@ export default function BackgroundFX() {
           left-1/2
           top-1/2
 
-          h-[650px]
-          w-[650px]
+          h-95
+          w-95
+          sm:h-162.5
+          sm:w-162.5
 
           -translate-x-1/2
           -translate-y-1/2
@@ -84,9 +87,11 @@ export default function BackgroundFX() {
 
           bg-cyan-400/10
 
-          blur-[170px]
+          blur-[90px]
+          sm:blur-[170px]
         "
       />
     </>
   );
 }
+export default memo(BackgroundFX);

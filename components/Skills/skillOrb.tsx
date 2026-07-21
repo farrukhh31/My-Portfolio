@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { memo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Float, Html, useCursor } from "@react-three/drei";
 import * as THREE from "three";
@@ -15,7 +15,7 @@ type Props = {
   onSelect: (skill: PlacedSkill) => void;
 };
 
-export default function SkillOrb({
+function SkillOrb({
   skill,
   selected,
   dimmed,
@@ -56,9 +56,11 @@ export default function SkillOrb({
           }}
           onPointerOut={() => setHovered(false)}
         >
-          {/* generous invisible hit target, easier to aim than the gem itself */}
+          {/* generous invisible hit target — sized past the gem itself so
+              it's easy to aim with a mouse and forgiving enough for a
+              fingertip on touch screens */}
           <mesh>
-            <sphereGeometry args={[0.85, 8, 8]} />
+            <sphereGeometry args={[1.05, 8, 8]} />
             <meshBasicMaterial transparent opacity={0} depthWrite={false} />
           </mesh>
 
@@ -123,3 +125,5 @@ export default function SkillOrb({
     </group>
   );
 }
+
+export default memo(SkillOrb);

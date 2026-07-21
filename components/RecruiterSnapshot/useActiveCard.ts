@@ -8,32 +8,27 @@ export default function useActiveCard(
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    function update() {
-      if (!ref.current) return;
+    const node = ref.current;
+    if (!node) return;
 
-      const rect = ref.current.getBoundingClientRect();
+    // IntersectionObserver only re-runs when the intersection actually
+    // changes, instead of reading layout (getBoundingClientRect) on
+    // every scroll frame like the previous window-scroll-listener
+    // version did. Much cheaper on mobile, especially with several
+    // cards on the page at once.
+    const observer = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      {
+        // Treat the card as "active" while it sits inside the middle
+        // 20% band of the viewport.
+        rootMargin: "-40% 0px -40% 0px",
+        threshold: 0,
+      }
+    );
 
-      const center = window.innerHeight / 2;
+    observer.observe(node);
 
-      const cardCenter = rect.top + rect.height / 2;
-
-      const distance = Math.abs(center - cardCenter);
-
-      setActive(distance < rect.height * 0.45);
-    }
-
-    update();
-
-    window.addEventListener("scroll", update, {
-      passive: true,
-    });
-
-    window.addEventListener("resize", update);
-
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
+    return () => observer.disconnect();
   }, [ref]);
 
   return active;

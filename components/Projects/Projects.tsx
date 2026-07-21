@@ -63,7 +63,7 @@ export default function Projectss() {
   return (
     <section id="projects" className="container-width section-padding">
       <motion.div
-        className="mb-12 text-center"
+        className="mb-8 sm:mb-12 text-center"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
@@ -73,7 +73,7 @@ export default function Projectss() {
           Portfolio
         </p>
 
-        <h2 className="mt-4 text-5xl font-black">Featured Projects</h2>
+        <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-black">Featured Projects</h2>
 
         <p className="mx-auto mt-6 max-w-3xl text-slate-400">
           A selection of web applications, games, infrastructure, and AI
@@ -84,7 +84,7 @@ export default function Projectss() {
       </motion.div>
 
       <motion.div
-        className="mb-14 flex flex-wrap items-center justify-center gap-3"
+        className="mb-10 sm:mb-14 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
@@ -110,7 +110,7 @@ export default function Projectss() {
       </motion.div>
 
       <motion.div
-        className="grid gap-10 lg:grid-cols-2"
+        className="grid gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-10"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { memo, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { QuadraticBezierLine } from "@react-three/drei";
 import * as THREE from "three";
@@ -27,7 +27,7 @@ function bezierPoint(
   );
 }
 
-export default function SkillEdge({ start, end, color, reducedMotion }: Props) {
+function SkillEdge({ start, end, color, reducedMotion }: Props) {
   const pulseRef = useRef<THREE.Mesh>(null);
   const scratch = useMemo(() => new THREE.Vector3(), []);
 
@@ -65,3 +65,5 @@ export default function SkillEdge({ start, end, color, reducedMotion }: Props) {
     </group>
   );
 }
+
+export default memo(SkillEdge);

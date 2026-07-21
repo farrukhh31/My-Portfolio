@@ -6,16 +6,6 @@ import styles from "./transitions.module.css";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/**
- * Place once in the root layout, wrapping `{children}`. Next's App
- * Router keeps layouts mounted across navigations, so this reads the
- * current pathname and keys a motion.div on it — that's what gives
- * AnimatePresence something to exit/enter on every route change.
- *
- * `initial={false}` skips the entrance animation on the very first
- * page load (the Hero's own intro curtain already owns that moment);
- * every navigation after that gets the fade+blur transition.
- */
 export default function RouteTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 

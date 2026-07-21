@@ -104,6 +104,12 @@ export const TECH_LIST: TechItem[] = [
   { name: "AI", color: "#c084fc", icon: BrainCircuit },
 ];
 
-export const ORBIT_RADII = [140, 200, 260] as const;
+/**
+ * Percent-of-container offsets (not px). The orb box is now fluid
+ * (see .orbWrap in hero.module.css), so badge positions must scale
+ * with it — these match the original 140/200/260 px radii as a
+ * fraction of the original 560px design width (140/560, 200/560, 260/560).
+ */
+export const ORBIT_RADII = [25, 35.7, 46.43] as const;
 
 export const PARTICLE_COLORS = ["#22d3ee", "#3b82f6", "#8b5cf6"];

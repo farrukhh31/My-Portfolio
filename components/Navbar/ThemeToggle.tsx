@@ -28,7 +28,7 @@ export default function ThemeToggle() {
           border
           border-white/10
 
-          bg-white/[0.04]
+          bg-white/4
         "
       />
     );
@@ -59,7 +59,7 @@ export default function ThemeToggle() {
         border
         border-white/10
 
-        bg-white/[0.04]
+        bg-white/4
 
         px-1
 
@@ -110,7 +110,7 @@ export default function ThemeToggle() {
 
           rounded-full
 
-          bg-gradient-to-br
+          bg-linear-to-br
           from-purple-500
           via-indigo-500
           to-cyan-500

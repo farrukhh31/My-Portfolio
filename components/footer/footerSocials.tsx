@@ -62,11 +62,15 @@ function SocialButton({
             "--accent": accent,
           } as React.CSSProperties
         }
-        className="group glass relative flex h-14 w-14 items-center justify-center rounded-full border border-white/10 transition-colors duration-300 hover:border-[var(--accent)]/50"
+        className="group glass relative flex h-12 w-12 items-center justify-center rounded-full border border-white/10 transition-colors duration-300 hover:border-(--accent)/50 sm:h-14 sm:w-14"
       >
         <Icon
+          size={19}
+          className="relative z-10 text-slate-300 transition-colors duration-300 group-hover:text-(--accent) sm:hidden"
+        />
+        <Icon
           size={22}
-          className="relative z-10 text-slate-300 transition-colors duration-300 group-hover:text-[var(--accent)]"
+          className="relative z-10 hidden text-slate-300 transition-colors duration-300 group-hover:text-(--accent) sm:block"
         />
 
         {/* Glow that ramps in on hover, colored per-platform */}
@@ -83,7 +87,7 @@ function SocialButton({
 
 export default function FooterSocials() {
   return (
-    <div className="mt-12 flex justify-center gap-6">
+    <div className="mt-10 flex flex-wrap justify-center gap-4 sm:mt-12 sm:gap-6">
       {socials.map((s) => (
         <SocialButton
           key={s.name}

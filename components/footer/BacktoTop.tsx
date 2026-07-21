@@ -88,6 +88,7 @@ export default function BackToTop() {
   }, [bottomOffset]);
 
   function handlePointerMove(e: React.MouseEvent) {
+    if (window.matchMedia?.("(pointer: coarse)").matches) return;
     const rect = btnRef.current?.getBoundingClientRect();
     if (!rect) return;
     const cx = rect.left + rect.width / 2;

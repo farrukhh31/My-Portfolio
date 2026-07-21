@@ -16,7 +16,7 @@ export default function LaunchButton({
         whileTap={{
           scale: .95,
         }}
-        className="group relative mt-10 overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 px-10 py-4 font-semibold text-white shadow-[0_0_45px_rgba(34,211,238,.3)]"
+        className="group relative mt-8 overflow-hidden rounded-full bg-linear-to-r from-cyan-500 to-violet-500 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_0_45px_rgba(34,211,238,.3)] sm:mt-10 sm:px-10 sm:py-4 sm:text-base"
       >
         <span className="relative z-10 flex items-center gap-3">
           Enter Portfolio
@@ -41,7 +41,7 @@ export default function LaunchButton({
             duration: 2,
             repeat: Infinity,
           }}
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+          className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent"
         />
       </motion.button>
     </Magnetic>

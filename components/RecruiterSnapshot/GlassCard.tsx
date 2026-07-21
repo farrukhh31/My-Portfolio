@@ -45,26 +45,30 @@ export default function GlassCard({
         group
         relative
         overflow-hidden
-        rounded-[30px]
+        rounded-3xl
+        sm:rounded-[30px]
 
         border
         border-white/10
 
-        bg-white/[0.04]
+        bg-white/4
 
-        backdrop-blur-[30px]
+        backdrop-blur-md
+        sm:backdrop-blur-[20px]
 
         shadow-[0_20px_70px_rgba(0,0,0,.45)]
 
         transition-all
         duration-500
 
-        p-6
+        p-4
+        sm:p-5
+        md:p-6
 
         ${className}
       `}
     >
-      {/* Animated Border */}
+      {/* Animated Border — decorative only, skipped on small screens and for reduced-motion users to keep scrolling smooth */}
       <motion.div
         animate={{
           backgroundPosition: [
@@ -79,16 +83,19 @@ export default function GlassCard({
           ease: "linear",
         }}
         className="
+          hidden
+          sm:block
+          motion-reduce:hidden
           absolute
           inset-0
           rounded-[30px]
           opacity-60
-          p-[1px]
+          p-px
           bg-[linear-gradient(120deg,rgba(34,211,238,.45),rgba(255,255,255,.05),rgba(59,130,246,.4),rgba(255,255,255,.05),rgba(34,211,238,.45))]
-          bg-[length:250%_250%]
+          bg-size-[250%_250%]
         "
       >
-        <div className="h-full w-full rounded-[29px] bg-[#07111f]/70 backdrop-blur-[30px]" />
+        <div className="h-full w-full rounded-[29px] bg-[#07111f]/70 backdrop-blur-[20px]" />
       </motion.div>
 
       {/* Frosted Glass */}
@@ -97,9 +104,9 @@ export default function GlassCard({
           absolute
           inset-0
 
-          bg-gradient-to-br
-          from-white/[0.12]
-          via-white/[0.03]
+          bg-linear-to-br
+          from-white/12
+          via-white/3
           to-transparent
         "
       />
@@ -115,7 +122,7 @@ export default function GlassCard({
         "
       />
 
-      {/* Aurora Left */}
+      {/* Aurora Left — hidden below sm: it's off-screen behind other cards on narrow layouts anyway */}
       <motion.div
         animate={{
           x: [-40, 25, -40],
@@ -127,6 +134,9 @@ export default function GlassCard({
           ease: "easeInOut",
         }}
         className="
+          hidden
+          sm:block
+          motion-reduce:hidden
           absolute
           -top-36
           -left-36
@@ -150,6 +160,9 @@ export default function GlassCard({
           ease: "easeInOut",
         }}
         className="
+          hidden
+          sm:block
+          motion-reduce:hidden
           absolute
           -bottom-36
           -right-36
@@ -171,6 +184,9 @@ export default function GlassCard({
           repeat: Infinity,
         }}
         className="
+          hidden
+          sm:block
+          motion-reduce:hidden
           absolute
           inset-0
           bg-cyan-400/5
@@ -188,6 +204,9 @@ export default function GlassCard({
           ease: "linear",
         }}
         className="
+          hidden
+          sm:block
+          motion-reduce:hidden
           absolute
           top-0
           h-full
@@ -195,7 +214,7 @@ export default function GlassCard({
 
           rotate-12
 
-          bg-gradient-to-r
+          bg-linear-to-r
           from-transparent
           via-white/15
           to-transparent
@@ -214,7 +233,7 @@ export default function GlassCard({
 
           h-px
 
-          bg-gradient-to-r
+          bg-linear-to-r
           from-transparent
           via-white/70
           to-transparent
@@ -228,8 +247,8 @@ export default function GlassCard({
           inset-0
           opacity-[0.025]
           mix-blend-overlay
-          [background-image:radial-gradient(rgba(255,255,255,.9)_0.7px,transparent_0.7px)]
-          [background-size:8px_8px]
+          bg-[radial-gradient(rgba(255,255,255,.9)_0.7px,transparent_0.7px)]
+          bg-size-[8px_8px]
         "
       />
 

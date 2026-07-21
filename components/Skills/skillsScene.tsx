@@ -2,7 +2,13 @@
 
 import { Suspense, useMemo } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, Stars, Preload } from "@react-three/drei";
+import {
+  OrbitControls,
+  Stars,
+  Preload,
+  AdaptiveDpr,
+  AdaptiveEvents,
+} from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 
@@ -12,6 +18,8 @@ import SkillOrb from "./skillOrb";
 import SkillOrbitRing from "./skillOrbitRing";
 import SkillEdge from "./skillEdge";
 
+type Quality = "low" | "medium" | "high";
+
 type Props = {
   skills: Skill[];
   category: CategoryFilter;
@@ -20,6 +28,15 @@ type Props = {
   reducedMotion: boolean;
   allowDrag: boolean;
   starCount: number;
+  // Controls DPR ceiling and whether the postprocessing pass runs at all —
+  // phones and tablets skip the most expensive work to stay smooth.
+  quality: Quality;
+};
+
+const DPR_BY_QUALITY: Record<Quality, [number, number]> = {
+  low: [1, 1],
+  medium: [1, 1.5],
+  high: [1, 2],
 };
 
 // Gently re-centers the orbit target on whichever skill is selected, so the
@@ -55,6 +72,7 @@ export default function SkillsScene({
   reducedMotion,
   allowDrag,
   starCount,
+  quality,
 }: Props) {
   const { placed, rings, positionMap } = useSkillPositions(skills);
 
@@ -63,11 +81,21 @@ export default function SkillsScene({
 
   if (!selected) return null;
 
+  const bloomEnabled = !reducedMotion && quality !== "low";
+
   return (
     <Canvas
-      dpr={[1, 2]}
+      dpr={DPR_BY_QUALITY[quality]}
       camera={{ position: [0, 2, 13.5], fov: 34 }}
-      gl={{ alpha: true, antialias: true }}
+      gl={{
+        alpha: true,
+        antialias: quality !== "low",
+        powerPreference: "high-performance",
+      }}
+      // Lets three.js quietly drop resolution under load instead of
+      // stalling — keeps interaction responsive on weaker devices.
+      performance={{ min: 0.5 }}
+      style={{ touchAction: allowDrag ? "none" : "pan-y" }}
     >
       <ambientLight intensity={0.5} />
       <pointLight position={[8, 6, 8]} intensity={1.3} color="#22d3ee" />
@@ -133,17 +161,19 @@ export default function SkillsScene({
 
       <CameraRig target={selected.position} reducedMotion={reducedMotion} />
 
-      {!reducedMotion && (
-        <EffectComposer>
+      {bloomEnabled && (
+        <EffectComposer enableNormalPass={false}>
           <Bloom
             luminanceThreshold={0.2}
             luminanceSmoothing={0.9}
-            intensity={1.35}
+            intensity={quality === "high" ? 1.35 : 0.9}
             mipmapBlur
           />
         </EffectComposer>
       )}
 
+      <AdaptiveDpr pixelated />
+      <AdaptiveEvents />
       <Preload all />
     </Canvas>
   );

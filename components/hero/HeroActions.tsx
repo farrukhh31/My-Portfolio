@@ -37,6 +37,10 @@ function MagneticButton({
   });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== "undefined" && !window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      return;
+    }
+
     const el = ref.current;
     if (!el) return;
 

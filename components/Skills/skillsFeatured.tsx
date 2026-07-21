@@ -22,12 +22,12 @@ export default function SkillsFeatured({ skills, selectedSkill, onSelect }: Prop
   );
 
   return (
-    <div className="mt-14">
-      <h3 className="mb-6 text-sm uppercase tracking-[0.3em] text-slate-400">
+    <div className="mt-10 sm:mt-14">
+      <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-slate-400 sm:mb-6 sm:text-sm sm:tracking-[0.3em]">
         Most relied-on, day to day
       </h3>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {top.map((skill, i) => (
           <motion.div
             key={skill.id}

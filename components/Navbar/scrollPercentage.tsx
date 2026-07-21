@@ -63,7 +63,7 @@ export default function ScrollPercentage() {
         font-semibold
         text-zinc-300
         backdrop-blur-md
-        min-w-[60px]
+        min-w-15
       "
     >
       {progress}%

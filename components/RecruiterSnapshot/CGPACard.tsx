@@ -50,8 +50,11 @@ export default function CGPACard() {
           }}
           className="
             flex
-            h-20
-            w-20
+            h-16
+            w-16
+            sm:h-20
+            sm:w-20
+            shrink-0
             items-center
             justify-center
             rounded-full
@@ -63,7 +66,8 @@ export default function CGPACard() {
 
           <span
             className="
-              text-2xl
+              text-xl
+              sm:text-2xl
               font-bold
               text-cyan-300
             "
@@ -102,7 +106,7 @@ export default function CGPACard() {
             className="
               h-full
               rounded-full
-              bg-gradient-to-r
+              bg-linear-to-r
               from-cyan-400
               to-blue-500
             "

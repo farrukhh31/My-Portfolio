@@ -8,14 +8,14 @@ type Props = {
 
 export default function LoadingProgress({ progress }: Props) {
   return (
-    <div className="mt-14 w-[320px]">
+    <div className="mt-10 w-full max-w-[320px] sm:mt-14">
       {/* Percentage */}
       <div className="mb-4 flex items-center justify-between">
         <motion.span
           key={Math.floor(progress)}
           initial={{ opacity: 0.4, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-black tracking-tight text-white"
+          className="text-3xl font-black tracking-tight text-white sm:text-4xl"
         >
           {Math.floor(progress)}%
         </motion.span>
@@ -29,7 +29,7 @@ export default function LoadingProgress({ progress }: Props) {
       <div className="relative h-2 overflow-hidden rounded-full bg-white/10">
         {/* Fill */}
         <motion.div
-          className="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-violet-500"
+          className="absolute left-0 top-0 h-full rounded-full bg-linear-to-r from-cyan-400 via-sky-400 to-violet-500"
           animate={{
             width: `${progress}%`,
           }}

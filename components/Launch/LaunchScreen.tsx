@@ -26,7 +26,7 @@ export default function LaunchScreen() {
           duration: 2,
           ease: "easeInOut",
         }}
-        className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#030712]"
+        className="fixed inset-0 z-9999 flex items-center justify-center overflow-hidden bg-[#030712] px-4 sm:px-6"
       >
         <LaunchBackground />
 
@@ -40,7 +40,7 @@ export default function LaunchScreen() {
             duration: 6,
             repeat: Infinity,
           }}
-          className="absolute h-[700px] w-[700px] rounded-full bg-cyan-500/10 blur-[180px]"
+          className="absolute h-105 w-105 rounded-full bg-cyan-500/10 blur-[90px] sm:h-175 sm:w-175 sm:blur-[180px]"
         />
 
         {/* Launch Card */}

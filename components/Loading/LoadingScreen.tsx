@@ -30,7 +30,7 @@ export default function LoadingScreen() {
           className="
             fixed
             inset-0
-            z-[99999]
+            z-99999
             flex
             items-center
             justify-center
@@ -49,7 +49,7 @@ export default function LoadingScreen() {
               absolute
               inset-0
               bg-[linear-gradient(rgba(255,255,255,.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.03)_1px,transparent_1px)]
-              bg-[size:60px_60px]
+              bg-size-[60px_60px]
             "
           />
 
@@ -84,20 +84,23 @@ export default function LoadingScreen() {
               relative
               z-10
 
-              w-[420px]
-              max-w-[90vw]
+              w-105
+              max-w-[92vw]
 
-              rounded-3xl
+              rounded-2xl
+              sm:rounded-3xl
 
               border
               border-white/10
 
-              bg-white/[0.04]
+              bg-white/4
 
               backdrop-blur-2xl
 
-              px-10
-              py-12
+              px-6
+              py-9
+              sm:px-10
+              sm:py-12
 
               shadow-[0_20px_80px_rgba(0,0,0,.45)]
             "
@@ -118,13 +121,16 @@ export default function LoadingScreen() {
                   repeat: Infinity,
                 }}
                 className="
-                  mt-8
+                  mt-6
+                  sm:mt-8
 
-                  text-[11px]
+                  text-[10px]
+                  sm:text-[11px]
 
                   uppercase
 
-                  tracking-[0.45em]
+                  tracking-[0.35em]
+                  sm:tracking-[0.45em]
 
                   text-cyan-400/80
                 "

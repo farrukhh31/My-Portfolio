@@ -20,6 +20,8 @@ export default function Magnetic({
   function move(
     e: React.MouseEvent<HTMLDivElement>
   ) {
+    if (window.matchMedia?.("(pointer: coarse)").matches) return;
+
     const rect =
       e.currentTarget.getBoundingClientRect();
 

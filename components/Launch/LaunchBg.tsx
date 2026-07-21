@@ -1,16 +1,28 @@
 "use client";
 
+import { memo, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const particles = Array.from({ length: 40 }, (_, i) => ({
-  id: i,
-  left: (i * 17) % 100,
-  top: (i * 29) % 100,
-  duration: 3 + (i % 5),
-  delay: i * 0.08,
-}));
+function buildParticles(count: number) {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    left: (i * 17) % 100,
+    top: (i * 29) % 100,
+    duration: 3 + (i % 5),
+    delay: i * 0.08,
+  }));
+}
 
-export default function LaunchBackground() {
+function LaunchBackground() {
+  const [particleCount, setParticleCount] = useState(40);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)");
+    setParticleCount(mq.matches ? 16 : 40);
+  }, []);
+
+  const particles = buildParticles(particleCount);
+
   return (
     <div className="absolute inset-0 overflow-hidden">
 
@@ -21,13 +33,13 @@ export default function LaunchBackground() {
         absolute inset-0
         bg-[linear-gradient(rgba(255,255,255,.03)_1px,transparent_1px),
         linear-gradient(90deg,rgba(255,255,255,.03)_1px,transparent_1px)]
-        bg-[size:48px_48px]
+        bg-size-[48px_48px]
         "
       />
 
       {/* Center Glow */}
 
-      <div className="absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/10 blur-[180px]" />
+      <div className="absolute left-1/2 top-1/2 h-105 w-105 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/10 blur-[90px] sm:h-175 sm:w-175 sm:blur-[180px]" />
 
       {/* Cyan Beam */}
 
@@ -45,11 +57,14 @@ export default function LaunchBackground() {
         absolute
         left-1/4
         top-[-20%]
-        h-[900px]
-        w-[220px]
+        h-150
+        w-35
+        sm:h-225
+        sm:w-55
         rotate-12
         bg-cyan-400/10
-        blur-[120px]
+        blur-[70px]
+        sm:blur-[120px]
         "
       />
 
@@ -69,11 +84,14 @@ export default function LaunchBackground() {
         absolute
         right-0
         bottom-[-20%]
-        h-[850px]
-        w-[220px]
+        h-137.5
+        w-35
+        sm:h-212.5
+        sm:w-55
         -rotate-12
         bg-violet-500/10
-        blur-[120px]
+        blur-[70px]
+        sm:blur-[120px]
         "
       />
 
@@ -94,11 +112,14 @@ export default function LaunchBackground() {
         absolute
         left-0
         top-0
-        h-[500px]
-        w-[500px]
+        h-75
+        w-75
+        sm:h-125
+        sm:w-125
         rounded-full
         bg-cyan-500/15
-        blur-[180px]
+        blur-[90px]
+        sm:blur-[180px]
         "
       />
 
@@ -119,11 +140,14 @@ export default function LaunchBackground() {
         absolute
         right-0
         bottom-0
-        h-[600px]
-        w-[600px]
+        h-90
+        w-90
+        sm:h-150
+        sm:w-150
         rounded-full
         bg-violet-500/15
-        blur-[200px]
+        blur-[100px]
+        sm:blur-[200px]
         "
       />
 
@@ -156,3 +180,5 @@ export default function LaunchBackground() {
     </div>
   );
 }
+
+export default memo(LaunchBackground);

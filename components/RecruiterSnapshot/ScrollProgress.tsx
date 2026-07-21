@@ -29,7 +29,7 @@ export default function ScrollProgress() {
         top-1/2
         -translate-y-1/2
 
-        h-[420px]
+        h-105
         w-8
 
         justify-center
@@ -63,7 +63,7 @@ export default function ScrollProgress() {
           h-full
           w-px
 
-          bg-gradient-to-b
+          bg-linear-to-b
           from-cyan-300
           via-cyan-400
           to-blue-500

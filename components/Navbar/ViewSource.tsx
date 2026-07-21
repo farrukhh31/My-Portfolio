@@ -26,7 +26,7 @@ export default function ViewSource() {
         border
         border-white/10
 
-        bg-white/[0.04]
+        bg-white/4
 
         px-3
         py-2

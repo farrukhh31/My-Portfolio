@@ -6,7 +6,7 @@ import { identity } from "./footerData";
 
 export default function FooterLogo() {
   return (
-    <div className="relative mx-auto flex h-24 w-24 items-center justify-center">
+    <div className="relative mx-auto flex h-20 w-20 items-center justify-center sm:h-24 sm:w-24">
       {/* Outer rotating ring, dashed for a "signal dial" feel */}
       <motion.div
         animate={{ rotate: 360 }}
@@ -22,8 +22,8 @@ export default function FooterLogo() {
       />
 
       {/* Core */}
-      <div className="flex h-16 w-16 items-center justify-center rounded-full border border-cyan-400/20 bg-gradient-to-br from-cyan-400/20 to-violet-500/20 backdrop-blur-xl shadow-[0_0_50px_rgba(34,211,238,.25)]">
-        <span className="text-2xl font-black text-white">{identity.initials}</span>
+      <div className="flex h-14 w-14 items-center justify-center rounded-full border border-cyan-400/20 bg-linear-to-br from-cyan-400/20 to-violet-500/20 backdrop-blur-xl shadow-[0_0_50px_rgba(34,211,238,.25)] sm:h-16 sm:w-16">
+        <span className="text-xl font-black text-white sm:text-2xl">{identity.initials}</span>
       </div>
 
       {/* Ambient pulse */}

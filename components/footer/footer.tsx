@@ -28,6 +28,7 @@ export default function Footer() {
   const orb2Y = useTransform(springY, [0, 1], ["4%", "-4%"]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
+    if (window.matchMedia?.("(pointer: coarse)").matches) return;
     const rect = sectionRef.current?.getBoundingClientRect();
     if (!rect) return;
     mx.set((e.clientX - rect.left) / rect.width);
@@ -39,24 +40,24 @@ export default function Footer() {
       id="footer"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative overflow-hidden py-32 motion-reduce:transform-none"
+      className="relative overflow-hidden py-16 motion-reduce:transform-none sm:py-24 lg:py-32"
     >
       {/* Faint dot-grid, fades toward the edges */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.15] [background-image:radial-gradient(circle,rgba(255,255,255,.4)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black,transparent)]"
+        className="pointer-events-none absolute inset-0 opacity-[0.15] bg-[radial-gradient(circle,rgba(255,255,255,.4)_1px,transparent_1px)] bg-size-[28px_28px] mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,black,transparent)]"
       />
 
       {/* Background glow, drifting slightly with the cursor */}
       <motion.div
         aria-hidden
         style={{ x: orb1X, y: orb1Y }}
-        className="absolute left-0 top-0 h-96 w-96 rounded-full bg-cyan-500/10 blur-[180px] motion-reduce:!transform-none"
+        className="absolute left-0 top-0 h-96 w-96 rounded-full bg-cyan-500/10 blur-[180px] motion-reduce:transform-none!"
       />
       <motion.div
         aria-hidden
         style={{ x: orb2X, y: orb2Y }}
-        className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-violet-500/10 blur-[180px] motion-reduce:!transform-none"
+        className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-violet-500/10 blur-[180px] motion-reduce:transform-none!"
       />
 
       <Container>
@@ -68,19 +69,19 @@ export default function Footer() {
         >
           <FooterLogo />
 
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="mt-6 flex items-center justify-center gap-3 sm:mt-8">
             <span className="h-px w-8 bg-linear-to-r from-transparent to-cyan-400/60" />
             <span className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-300/80">
               Get In Touch
             </span>
-            <span className="h-px w-8 bg-gradient-to-l from-transparent to-cyan-400/60" />
+            <span className="h-px w-8 bg-linear-to-l from-transparent to-cyan-400/60" />
           </div>
 
-          <h2 className="mt-6 bg-[linear-gradient(110deg,#fff,45%,#a5f3fc,55%,#fff)] bg-[length:250%_100%] bg-clip-text text-center text-4xl font-black text-transparent [animation:shine_6s_linear_infinite] sm:text-5xl">
+          <h2 className="mt-6 bg-[linear-gradient(110deg,#fff,45%,#a5f3fc,55%,#fff)] bg-size-[250%_100%] bg-clip-text px-2 text-center text-3xl font-black text-transparent animate-[shine_6s_linear_infinite] sm:px-0 sm:text-4xl md:text-5xl">
             Let&apos;s Build Something Great
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-slate-400">
+          <p className="mx-auto mt-5 max-w-2xl px-2 text-center text-sm leading-6 text-slate-400 sm:mt-6 sm:px-0 sm:text-lg sm:leading-8">
             Whether you&apos;re looking for a Full Stack Developer, Game Developer, intern, or
             collaborator, I&apos;d love to hear from you.
           </p>

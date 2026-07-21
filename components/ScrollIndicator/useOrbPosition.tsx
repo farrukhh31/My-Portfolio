@@ -40,6 +40,8 @@ export default function useOrbPosition(
   const [pathLength, setPathLength] =
     useState(0);
 
+  const pathLengthRef = useRef(0);
+
   const [milestones, setMilestones] =
     useState<PathPoint[]>([]);
 
@@ -49,6 +51,7 @@ export default function useOrbPosition(
     const length =
       pathRef.current.getTotalLength();
 
+    pathLengthRef.current = length;
     setPathLength(length);
 
     const points: PathPoint[] = [];
@@ -78,8 +81,12 @@ export default function useOrbPosition(
 
       if (!pathRef.current) return;
 
-      const length =
-        pathRef.current.getTotalLength();
+      // Reuse the length measured once in the effect above instead of
+      // calling getTotalLength() again on every scroll-driven update —
+      // the path's geometry never changes at runtime.
+      const length = pathLengthRef.current;
+
+      if (!length) return;
 
       const current =
         pathRef.current.getPointAtLength(

@@ -47,8 +47,10 @@ export default function RecruiterSnapshot() {
         relative
         min-h-screen
         overflow-hidden
-        px-5
-        py-10
+        px-4
+        py-8
+        sm:px-5
+        sm:py-10
         md:px-10
         lg:px-16
       "
@@ -57,7 +59,7 @@ export default function RecruiterSnapshot() {
       <ScrollProgress />
       <AuroraBackground />
 
-      {/* Mouse Spotlight */}
+      {/* Mouse Spotlight — no-op on touch, harmless to keep mounted */}
       <ScrollSpotlight />
 
       <div
@@ -66,14 +68,16 @@ export default function RecruiterSnapshot() {
           z-10
           mx-auto
           max-w-7xl
-          space-y-6
+          space-y-4
+          sm:space-y-6
         "
       >
         {/* Top Row */}
         <div
           className="
             grid
-            gap-6
+            gap-4
+            sm:gap-6
             lg:grid-cols-3
           "
         >
@@ -85,7 +89,7 @@ export default function RecruiterSnapshot() {
             </ParallaxCard>
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 sm:gap-6">
             <ParallaxCard y={statusY} delay={0.1}>
               <ActiveCard>
         <StatusCard/>
@@ -104,7 +108,8 @@ export default function RecruiterSnapshot() {
         <div
           className="
             grid
-            gap-6
+            gap-4
+            sm:gap-6
             lg:grid-cols-3
           "
         >

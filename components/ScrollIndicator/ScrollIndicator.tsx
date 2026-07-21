@@ -11,8 +11,6 @@ import ScrollOrb from "./ScrollOrb";
 import Milestone from "./Milestone";
 import FloatingParticles from "./FloatingParticles";
 
-// import FloatingParticles from "./FloatingParticles";
-
 export default function ScrollIndicator() {
   const { scrollYProgress } = useScroll();
 
@@ -42,7 +40,7 @@ export default function ScrollIndicator() {
       h-[75vh]
       w-24
       -translate-y-1/2
-      lg:block
+      xl:block
       "
     >
       {/* Glass Background */}
@@ -67,18 +65,7 @@ export default function ScrollIndicator() {
         pathLength={pathLength}
       />
 
-      <ScrollPath
-    progress={progress}
-    pathRef={pathRef}
-    pathLength={pathLength}
-/>
-
-<FloatingParticles />
-
-<ScrollOrb
-    position={position}
-    velocity={velocity}
-/>
+      <FloatingParticles />
 
       {/* Orb */}
 

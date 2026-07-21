@@ -30,6 +30,11 @@ export default function ResumeCard() {
         group-hover:pointer-events-auto
         group-hover:translate-y-0
 
+        group-focus-within:opacity-100
+        group-focus-within:visible
+        group-focus-within:pointer-events-auto
+        group-focus-within:translate-y-0
+
         transition-all
         duration-200
         ease-out

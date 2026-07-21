@@ -26,17 +26,17 @@ export default function HeroCard() {
             Education
           </p>
 
-          <h2 className="mt-3 text-4xl font-extrabold leading-tight text-white">
+          <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight text-white">
             NED University of
             <br />
             Engineering & Technology
           </h2>
 
-          <p className="mt-3 text-lg text-slate-300">
+          <p className="mt-3 text-base sm:text-lg text-slate-300">
             BS Computer Science (Gaming & Animation)
           </p>
 
-          <p className="mt-6 max-w-2xl leading-8 text-slate-400">
+          <p className="mt-6 max-w-2xl text-sm sm:text-base leading-7 sm:leading-8 text-slate-400">
             Passionate about building scalable web applications,
             interactive games, and AI-powered solutions.
             I enjoy combining software engineering, creativity,
@@ -48,44 +48,44 @@ export default function HeroCard() {
         </div>
 
         {/* Bottom Stats */}
-        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="mt-8 sm:mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p className="text-xs uppercase tracking-widest text-slate-500">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
+            <p className="text-[11px] sm:text-xs uppercase tracking-widest text-slate-500">
               Location
             </p>
 
-            <p className="mt-2 font-semibold text-white">
+            <p className="mt-2 text-sm sm:text-base font-semibold text-white">
               Karachi, Pakistan
             </p>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p className="text-xs uppercase tracking-widest text-slate-500">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
+            <p className="text-[11px] sm:text-xs uppercase tracking-widest text-slate-500">
               Experience
             </p>
 
-            <p className="mt-2 font-semibold text-white">
+            <p className="mt-2 text-sm sm:text-base font-semibold text-white">
               3+ Internships
             </p>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p className="text-xs uppercase tracking-widest text-slate-500">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
+            <p className="text-[11px] sm:text-xs uppercase tracking-widest text-slate-500">
               Projects
             </p>
 
-            <p className="mt-2 font-semibold text-white">
+            <p className="mt-2 text-sm sm:text-base font-semibold text-white">
               20+ Projects
             </p>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p className="text-xs uppercase tracking-widest text-slate-500">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
+            <p className="text-[11px] sm:text-xs uppercase tracking-widest text-slate-500">
               Open To
             </p>
 
-            <p className="mt-2 font-semibold text-cyan-300">
+            <p className="mt-2 text-sm sm:text-base font-semibold text-cyan-300">
               AI • Full Stack • Game Dev
             </p>
           </div>

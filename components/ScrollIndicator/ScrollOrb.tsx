@@ -185,7 +185,7 @@ export default function ScrollOrb({
                 h-5
                 w-5
                 rounded-full
-                bg-gradient-to-br
+                bg-linear-to-br
                 from-cyan-200
                 via-cyan-300
                 to-cyan-500

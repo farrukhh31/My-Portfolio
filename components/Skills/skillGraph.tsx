@@ -36,7 +36,20 @@ export default function SkillGraph({
 }: Props) {
   const webglSupported = useWebglSupport();
   const reducedMotion = useReducedMotion();
-  const isCompact = useMediaQuery("(max-width: 768px)");
+
+  // Three device tiers instead of one binary "compact" flag, so tablets get
+  // their own middle ground rather than being lumped in with phones.
+  const isMobile = useMediaQuery("(max-width: 640px)");
+  const isTablet = useMediaQuery("(min-width: 641px) and (max-width: 1024px)");
+
+  // Rendering budget scales down on smaller/less powerful tiers so the
+  // scene stays smooth instead of dropping frames on phones and tablets.
+  const quality: "low" | "medium" | "high" = isMobile
+    ? "low"
+    : isTablet
+    ? "medium"
+    : "high";
+  const starCount = isMobile ? 350 : isTablet ? 650 : 1100;
 
   const fallbackSkills =
     category === "All"
@@ -51,15 +64,15 @@ export default function SkillGraph({
     <div
       role="img"
       aria-label="Interactive 3D constellation of skills, grouped and color-coded by discipline"
-      className="glass relative h-[600px] overflow-hidden rounded-3xl border border-white/10 bg-slate-950/40 backdrop-blur-xl lg:h-[700px]"
+      className="glass relative h-105 overflow-hidden rounded-2xl border border-white/10 bg-slate-950/40 backdrop-blur-xl sm:h-130 md:rounded-3xl lg:h-162.5 xl:h-175"
     >
       {/* ================= Background atmosphere ================= */}
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,.12),transparent_70%)]" />
 
-      <div className="pointer-events-none absolute left-10 top-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-[120px]" />
-      <div className="pointer-events-none absolute right-10 top-20 h-80 w-80 rounded-full bg-violet-500/10 blur-[140px]" />
-      <div className="pointer-events-none absolute bottom-10 left-1/3 h-64 w-64 rounded-full bg-sky-500/10 blur-[120px]" />
+      <div className="pointer-events-none absolute left-4 top-4 h-40 w-40 rounded-full bg-cyan-500/10 blur-[80px] sm:left-10 sm:top-10 sm:h-72 sm:w-72 sm:blur-[120px]" />
+      <div className="pointer-events-none absolute right-4 top-8 h-44 w-44 rounded-full bg-violet-500/10 blur-[90px] sm:right-10 sm:top-20 sm:h-80 sm:w-80 sm:blur-[140px]" />
+      <div className="pointer-events-none absolute bottom-4 left-1/3 h-36 w-36 rounded-full bg-sky-500/10 blur-[80px] sm:bottom-10 sm:h-64 sm:w-64 sm:blur-[120px]" />
 
       {/* ================= 3D scene, or graceful fallback ================= */}
 
@@ -70,11 +83,15 @@ export default function SkillGraph({
           selectedSkill={selectedSkill}
           onSelect={setSelectedSkill}
           reducedMotion={reducedMotion}
-          allowDrag={!isCompact}
-          starCount={isCompact ? 500 : 1100}
+          allowDrag={!isMobile}
+          starCount={starCount}
+          quality={quality}
         />
       ) : (
-        <div className="h-full overflow-y-auto p-6">
+        <div
+          className="h-full overflow-y-auto overscroll-contain p-3 sm:p-6"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
           <SkillsFallbackGrid
             skills={fallbackSkills}
             selectedSkill={selectedSkill}
@@ -87,11 +104,11 @@ export default function SkillGraph({
 
       <CornerBrackets />
 
-      <div className="pointer-events-none absolute left-8 top-7 flex flex-wrap gap-x-4 gap-y-2 text-[11px] uppercase tracking-wider text-slate-400">
+      <div className="pointer-events-none absolute left-4 top-4 flex flex-wrap gap-x-3 gap-y-1.5 text-[9px] uppercase tracking-wider text-slate-400 sm:left-8 sm:top-7 sm:gap-x-4 sm:gap-y-2 sm:text-[11px]">
         {activeCategories.map((cat) => (
           <span key={cat} className="flex items-center gap-1.5">
             <span
-              className="h-1.5 w-1.5 rounded-full"
+              className="h-1.5 w-1.5 shrink-0 rounded-full"
               style={{ background: categoryColor(cat) }}
             />
             {cat}
@@ -100,12 +117,12 @@ export default function SkillGraph({
       </div>
 
       {webglSupported && (
-        <p className="pointer-events-none absolute bottom-5 right-5 text-[11px] text-slate-500">
-          {isCompact ? "Tap a node to explore" : "Drag to rotate · Click a node to explore"}
+        <p className="pointer-events-none absolute bottom-3 right-3 text-[9px] text-slate-500 sm:bottom-5 sm:right-5 sm:text-[11px]">
+          {isMobile ? "Tap a node to explore" : "Drag to rotate · Click a node to explore"}
         </p>
       )}
 
-      <div className="pointer-events-none absolute bottom-0 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 left-1/2 h-32 w-32 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[80px] sm:h-48 sm:w-48 sm:blur-[120px]" />
     </div>
   );
 }

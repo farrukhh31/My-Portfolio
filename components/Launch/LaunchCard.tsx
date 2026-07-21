@@ -27,11 +27,11 @@ export default function LaunchCard({
         duration: 1.0,
         ease: "easeOut",
       }}
-      className="relative w-full max-w-xl overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-10 backdrop-blur-3xl shadow-[0_0_80px_rgba(34,211,238,.08)]"
+      className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-3xl shadow-[0_0_80px_rgba(34,211,238,.08)] sm:rounded-4xl sm:p-10"
     >
       {/* Top Gradient */}
 
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-400/60 to-transparent" />
 
       {/* Glow */}
 
@@ -44,7 +44,7 @@ export default function LaunchCard({
           duration: 5,
           repeat: Infinity,
         }}
-        className="absolute -top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px]"
+        className="absolute -top-20 left-1/2 h-52 w-52 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[80px] sm:h-72 sm:w-72 sm:blur-[120px]"
       />
 
       {/* Content */}
@@ -67,7 +67,7 @@ export default function LaunchCard({
           transition={{
             delay: 0.4,
           }}
-          className="mx-auto mt-8 inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-cyan-300"
+          className="mx-auto mt-6 inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-cyan-300 sm:mt-8 sm:px-5 sm:py-2 sm:text-xs sm:tracking-[0.35em]"
         >
           FA Launch Card
         </motion.div>
@@ -84,7 +84,7 @@ export default function LaunchCard({
           transition={{
             delay: 0.6,
           }}
-          className="mt-10 text-slate-400"
+          className="mt-8 text-sm text-slate-400 sm:mt-10 sm:text-base"
         >
           Welcome to
         </motion.p>
@@ -103,7 +103,7 @@ export default function LaunchCard({
           transition={{
             delay: 0.8,
           }}
-          className="mt-3 bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-5xl font-black text-transparent"
+          className="mt-3 bg-linear-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-3xl font-black text-transparent sm:text-4xl md:text-5xl"
         >
           Farrukh Ahmad
         </motion.h1>
@@ -120,7 +120,7 @@ export default function LaunchCard({
           transition={{
             delay: 1,
           }}
-          className="mt-5 text-lg text-cyan-300"
+          className="mt-4 text-sm text-cyan-300 sm:mt-5 sm:text-lg"
         >
           Full Stack Developer • Game Developer • DevOps
         </motion.p>
@@ -137,7 +137,7 @@ export default function LaunchCard({
           transition={{
             delay: 1.2,
           }}
-          className="mx-auto mt-8 max-w-md leading-8 text-slate-400"
+          className="mx-auto mt-6 max-w-md text-sm leading-6 text-slate-400 sm:mt-8 sm:text-base sm:leading-8"
         >
           Building modern web applications,
           immersive game experiences,
@@ -177,7 +177,7 @@ export default function LaunchCard({
           transition={{
             delay: 0.1,
           }}
-          className="mt-10 flex items-center justify-center gap-3 text-sm text-slate-500"
+          className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-slate-500 sm:mt-10 sm:text-sm"
         >
           <span>Next.js</span>
 

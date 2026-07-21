@@ -41,7 +41,7 @@ export default function FooterLinks() {
               h-px
               w-full
               origin-left
-              bg-gradient-to-r
+              bg-linear-to-r
               from-cyan-400
               to-violet-400
             "

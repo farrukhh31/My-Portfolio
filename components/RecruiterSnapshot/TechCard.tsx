@@ -10,7 +10,7 @@ export default function TechCard() {
   return (
     <GlassCard delay={0.6}>
 
-      <h3 className="text-2xl font-semibold text-white">
+      <h3 className="text-xl sm:text-2xl font-semibold text-white">
         Tech Stack
       </h3>
 

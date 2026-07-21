@@ -13,7 +13,8 @@ export default function StatsCard() {
 
       <h3
         className="
-          text-2xl
+          text-xl
+          sm:text-2xl
           font-semibold
           text-white
         "
@@ -24,10 +25,12 @@ export default function StatsCard() {
 
       <div
         className="
-          mt-6
+          mt-5
+          sm:mt-6
           grid
           grid-cols-2
-          gap-4
+          gap-3
+          sm:gap-4
           md:grid-cols-4
         "
       >
@@ -52,7 +55,8 @@ export default function StatsCard() {
               border
               border-white/10
               bg-white/5
-              p-5
+              p-4
+              sm:p-5
               text-center
             "
           >

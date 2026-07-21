@@ -16,7 +16,7 @@ export default function LoadingLogo() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute h-44 w-44 rounded-full bg-cyan-400/20 blur-[80px]"
+        className="absolute h-36 w-36 rounded-full bg-cyan-400/20 blur-[60px] sm:h-44 sm:w-44 sm:blur-[80px]"
       />
 
       {/* Outer Ring */}
@@ -27,7 +27,7 @@ export default function LoadingLogo() {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute h-28 w-28 rounded-full border border-cyan-400/20"
+        className="absolute h-24 w-24 rounded-full border border-cyan-400/20 sm:h-28 sm:w-28"
       />
 
       {/* Orbit Dot */}
@@ -38,7 +38,7 @@ export default function LoadingLogo() {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute h-28 w-28"
+        className="absolute h-24 w-24 sm:h-28 sm:w-28"
       >
         <div className="absolute -top-1 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.9)]" />
       </motion.div>
@@ -57,8 +57,10 @@ export default function LoadingLogo() {
         className="
           relative
           flex
-          h-20
-          w-20
+          h-16
+          w-16
+          sm:h-20
+          sm:w-20
           items-center
           justify-center
           rounded-2xl
@@ -74,13 +76,14 @@ export default function LoadingLogo() {
       >
         <span
           className="
-            bg-gradient-to-r
+            bg-linear-to-r
             from-cyan-300
             via-sky-400
             to-violet-400
 
             bg-clip-text
-            text-3xl
+            text-2xl
+            sm:text-3xl
             font-black
             tracking-tight
             text-transparent

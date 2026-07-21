@@ -73,7 +73,7 @@ export default function AnimatedCounter({
       transition={{
         duration: 0.5,
       }}
-      className="font-bold text-4xl tracking-tight"
+      className="font-bold text-3xl sm:text-4xl tracking-tight"
     >
       {count}
       {suffix}

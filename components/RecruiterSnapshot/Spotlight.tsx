@@ -23,7 +23,9 @@ export default function ScrollSpotlight(){
 
         }}
 
-        className="absolute inset-0"
+        // Hidden on touch devices: there's no cursor to spotlight there,
+        // and skipping the mount avoids an unused mousemove listener.
+        className="absolute inset-0 hidden sm:block"
 
         style={{
 

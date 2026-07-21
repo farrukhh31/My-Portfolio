@@ -92,11 +92,11 @@ export default function ProjectCard({ project, index = 0 }: Props) {
           />
 
           {/* Index marker */}
-          <span className="absolute left-6 top-6 z-20 font-mono text-sm text-white/40">
+          <span className="absolute left-4 top-4 sm:left-6 sm:top-6 z-20 font-mono text-sm text-white/40">
             {String(index + 1).padStart(2, "0")}
           </span>
 
-          <div className="absolute right-6 top-6 z-20 flex items-center gap-2">
+          <div className="absolute right-4 top-4 sm:right-6 sm:top-6 z-20 flex flex-wrap items-center justify-end gap-2">
             {project.featured && (
               <span className="rounded-full border border-amber-300/40 bg-linear-to-r from-amber-300/20 to-yellow-200/10 px-3 py-1 text-xs font-medium tracking-wide text-amber-200 backdrop-blur-sm">
                 Featured
@@ -111,7 +111,7 @@ export default function ProjectCard({ project, index = 0 }: Props) {
           </div>
 
           {/* Image */}
-          <div className="relative h-64 overflow-hidden">
+          <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
             <motion.div
               className="h-full w-full"
               whileHover={{ scale: 1.12 }}
@@ -140,12 +140,12 @@ export default function ProjectCard({ project, index = 0 }: Props) {
               <button
                 onClick={() => setVideoOpen(true)}
                 aria-label={`${videoLabel}: ${project.title}`}
-                className="absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                className="absolute inset-0 z-10 flex items-center justify-center opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100"
               >
                 <motion.span
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`flex h-16 w-16 items-center justify-center rounded-full ${style.button} shadow-lg`}
+                  className={`flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full ${style.button} shadow-lg`}
                 >
                   <Play size={24} fill="currentColor" className="ml-0.5" />
                 </motion.span>
@@ -153,14 +153,14 @@ export default function ProjectCard({ project, index = 0 }: Props) {
             )}
 
             {/* Small icon buttons that slide up over the image on hover */}
-            <div className="absolute inset-0 z-10 flex items-end justify-end gap-3 p-6 opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+            <div className="absolute inset-0 z-10 flex items-end justify-end gap-3 p-4 sm:p-6 opacity-100 translate-y-0 transition-all duration-300 md:opacity-0 md:translate-y-3 md:group-hover:opacity-100 md:group-hover:translate-y-0">
               {hasLiveDemo && (
                 <a
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View live demo of ${project.title}`}
-                  className={`flex h-11 w-11 items-center justify-center rounded-full text-slate-950 transition-transform duration-300 hover:scale-110 ${style.button}`}
+                  className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full text-slate-950 transition-transform duration-300 hover:scale-110 ${style.button}`}
                 >
                   <ExternalLink size={18} />
                 </a>
@@ -171,7 +171,7 @@ export default function ProjectCard({ project, index = 0 }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View GitHub repository for ${project.title}`}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-sm transition-transform duration-300 hover:scale-110 hover:border-white/50"
+                  className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-sm transition-transform duration-300 hover:scale-110 hover:border-white/50"
                 >
                   <FaGithub size={18} />
                 </a>
@@ -180,9 +180,9 @@ export default function ProjectCard({ project, index = 0 }: Props) {
           </div>
 
           {/* Content */}
-          <div className="relative z-10 p-8">
+          <div className="relative z-10 p-5 sm:p-6 md:p-8">
             <div className="flex items-center gap-2">
-              <h3 className={`text-2xl font-bold text-white transition-colors duration-300 ${style.groupHoverText}`}>
+              <h3 className={`text-xl sm:text-2xl font-bold text-white transition-colors duration-300 ${style.groupHoverText}`}>
                 {project.title}
               </h3>
               <ArrowUpRight

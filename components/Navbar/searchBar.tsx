@@ -16,7 +16,7 @@ export default function SearchBar({
     <div className="flex items-center gap-3 border-b border-white/10 px-4 py-4">
       <Search
         size={18}
-        className="text-zinc-400 flex-shrink-0"
+        className="text-zinc-400 shrink-0"
       />
 
       <Command.Input

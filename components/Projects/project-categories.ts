@@ -1,8 +1,4 @@
-// Central palette for each discipline shown in the portfolio.
-// Every card, filter pill, and badge pulls its color from here so
-// the four categories stay visually distinct without touching each
-// component individually. Add a new category by adding a new key —
-// TypeScript will flag any project that doesn't match.
+
 
 export type ProjectCategory = "webdev" | "gamedev" | "devops" | "ai";
 

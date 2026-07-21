@@ -32,7 +32,7 @@ export default function SearchResults({
 
   return (
     <>
-      <Command.List className="max-h-[420px] overflow-y-auto p-2">
+      <Command.List className="max-h-[min(420px,55vh)] overflow-y-auto p-2">
 
         <Command.Empty className="py-8 text-center text-sm text-zinc-500">
           No results found.

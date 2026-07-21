@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import styles from "./hero.module.css";
@@ -49,23 +49,43 @@ export default function OrbVisual() {
   const springRotateX = useSpring(rotateX, { stiffness: 120, damping: 14 });
   const springRotateY = useSpring(rotateY, { stiffness: 120, damping: 14 });
 
-  if (wrapRef.current && (pointerX || pointerY)) {
-    const rect = wrapRef.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const relX = (pointerX - cx) / rect.width;
-    const relY = (pointerY - cy) / rect.height;
-    rotateY.set(relX * 14);
-    rotateX.set(-relY * 14);
-  }
+  const [sphereLightBackground, setSphereLightBackground] = useState<string | undefined>(undefined);
 
-  let sphereLightBackground: string | undefined;
-  if (sphereRef.current && (pointerX || pointerY)) {
-    const sr = sphereRef.current.getBoundingClientRect();
-    const lx = ((pointerX - sr.left) / sr.width) * 100;
-    const ly = ((pointerY - sr.top) / sr.height) * 100;
-    sphereLightBackground = `radial-gradient(circle at ${lx}% ${ly}%, rgba(255,255,255,.22), rgba(59,130,246,.10) 35%, transparent 70%)`;
-  }
+  // Touch/coarse-pointer devices (phones, tablets) have no meaningful hover
+  // position and no benefit from the 3D tilt — skip the work entirely there.
+  const [enableTilt, setEnableTilt] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setEnableTilt(mq.matches);
+    const onChange = () => setEnableTilt(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  // Reading layout (getBoundingClientRect) here in an effect — rather than
+  // during render — avoids forcing a synchronous reflow on every pointer move.
+  useEffect(() => {
+    if (!enableTilt || (!pointerX && !pointerY)) return;
+
+    if (wrapRef.current) {
+      const rect = wrapRef.current.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const relX = (pointerX - cx) / rect.width;
+      const relY = (pointerY - cy) / rect.height;
+      rotateY.set(relX * 14);
+      rotateX.set(-relY * 14);
+    }
+
+    if (sphereRef.current) {
+      const sr = sphereRef.current.getBoundingClientRect();
+      const lx = ((pointerX - sr.left) / sr.width) * 100;
+      const ly = ((pointerY - sr.top) / sr.height) * 100;
+      setSphereLightBackground(
+        `radial-gradient(circle at ${lx}% ${ly}%, rgba(255,255,255,.22), rgba(59,130,246,.10) 35%, transparent 70%)`
+      );
+    }
+  }, [pointerX, pointerY, enableTilt, rotateX, rotateY]);
 
   return (
     <div className={styles.colRight}>
@@ -118,8 +138,8 @@ function OrbitBadge({ badge }: { badge: OrbitedBadge }) {
     <div
       className={styles.badge}
       style={{
-        left: `calc(50% + ${badge.x}px - 27px)`,
-        top: `calc(50% + ${badge.y}px - 27px)`,
+        left: `calc(50% + ${badge.x}%)`,
+        top: `calc(50% + ${badge.y}%)`,
         color: badge.color,
         animationDelay: `${badge.delay}s`,
       }}

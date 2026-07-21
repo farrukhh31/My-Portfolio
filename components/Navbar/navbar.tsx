@@ -5,11 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
-  useMotionValueEvent,
   useScroll,
+  useTransform,
 } from "framer-motion";
 
-import { Command, Download, Menu, X } from "lucide-react";
+import { Command, Download, Menu, Search, X } from "lucide-react";
 
 import MouseSpotlight from "./Spotlight";
 import CommandPalette from "./commandPalette";
@@ -37,12 +37,7 @@ export default function Navbar() {
   /* Scroll Percentage */
 
   const { scrollYProgress } = useScroll();
-
-  const [scrollPercent, setScrollPercent] = useState(0);
-
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
-    setScrollPercent(Math.round(value * 100));
-  });
+  const scrollPercentValue = useTransform(scrollYProgress, (v) => `${Math.round(v * 100)}%`);
 
   /* Active Section */
 
@@ -95,16 +90,18 @@ export default function Navbar() {
   /* Close Mobile Menu On Outside Click */
 
   useEffect(() => {
-    const close = (e: MouseEvent) => {
+    const close = (e: MouseEvent | TouchEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setMobileOpen(false);
       }
     };
 
     document.addEventListener("mousedown", close);
+    document.addEventListener("touchstart", close);
 
     return () => {
       document.removeEventListener("mousedown", close);
+      document.removeEventListener("touchstart", close);
     };
   }, []);
 
@@ -381,32 +378,53 @@ export default function Navbar() {
                 2xl:block
               "
             >
-              {scrollPercent}%
+              <motion.span>{scrollPercentValue}</motion.span>
             </motion.div>
           </div>
 
-          {/* Mobile Button */}
+          {/* Mobile/Tablet controls: search trigger + hamburger, grouped together */}
 
-          <button
-            type="button"
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="
-              rounded-xl
-              p-2
+          <div className="flex items-center gap-1 lg:hidden">
+            <button
+              type="button"
+              aria-label="Open search"
+              onClick={() => {
+                setMobileOpen(false);
+                setPalette(true);
+              }}
+              className="
+                rounded-xl
+                p-2
 
-              text-white
+                text-white
 
-              transition
+                transition
 
-              hover:bg-white/10
+                hover:bg-white/10
+              "
+            >
+              <Search size={20} />
+            </button>
 
-              lg:hidden
-            "
-          >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+            <button
+              type="button"
+              aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="
+                rounded-xl
+                p-2
+
+                text-white
+
+                transition
+
+                hover:bg-white/10
+              "
+            >
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -460,10 +478,10 @@ export default function Navbar() {
                   </button>
                 ))}
 
-                <div className="mt-4 flex items-center justify-between gap-3">
+                <div className="mt-4 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <LiveClock />
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-between gap-3 sm:justify-start">
                     <ViewSource />
                     <ThemeToggle />
                   </div>

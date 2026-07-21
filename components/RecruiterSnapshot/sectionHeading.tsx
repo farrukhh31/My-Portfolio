@@ -46,7 +46,9 @@ export default function SectionHeading({
       <h2
         className="
           max-w-3xl
-          text-5xl
+          text-3xl
+          sm:text-4xl
+          md:text-5xl
           font-bold
           leading-tight
           text-white
@@ -57,10 +59,13 @@ export default function SectionHeading({
 
       <p
         className="
-          mt-6
+          mt-4
+          sm:mt-6
           max-w-2xl
-          text-lg
-          leading-8
+          text-base
+          sm:text-lg
+          leading-7
+          sm:leading-8
           text-slate-400
         "
       >

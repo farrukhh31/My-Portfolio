@@ -18,7 +18,7 @@ export default function SkillFilters({ skills, selected, onChange }: Props) {
   ];
 
   return (
-    <div className="mb-12 flex flex-wrap justify-center gap-3">
+    <div className="mb-8 flex flex-wrap justify-center gap-2 sm:mb-12 sm:gap-3">
       {filters.map((filter) => {
         const count =
           filter === "All"
@@ -33,7 +33,7 @@ export default function SkillFilters({ skills, selected, onChange }: Props) {
             key={filter}
             onClick={() => onChange(filter)}
             aria-pressed={isActive}
-            className="relative isolate overflow-hidden rounded-full px-6 py-3 text-sm font-medium transition-colors duration-300"
+            className="relative isolate overflow-hidden rounded-full px-4 py-2 text-xs font-medium transition-colors duration-300 sm:px-6 sm:py-3 sm:text-sm"
           >
             {isActive ? (
               <motion.span

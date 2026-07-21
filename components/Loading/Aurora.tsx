@@ -1,8 +1,9 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 
-export default function Aurora() {
+function Aurora() {
   return (
     <>
       <motion.div
@@ -16,7 +17,7 @@ export default function Aurora() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-cyan-500/20 blur-[180px]"
+        className="absolute left-1/4 top-1/4 h-80 w-[320px] rounded-full bg-cyan-500/20 blur-[90px] sm:h-125 sm:w-125 sm:blur-[180px]"
       />
 
       <motion.div
@@ -30,7 +31,7 @@ export default function Aurora() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute right-1/4 bottom-1/4 h-[550px] w-[550px] rounded-full bg-violet-500/20 blur-[180px]"
+        className="absolute right-1/4 bottom-1/4 h-87.5 w-87.5 rounded-full bg-violet-500/20 blur-[90px] sm:h-137.5 sm:w-137.5 sm:blur-[180px]"
       />
 
       <motion.div
@@ -46,3 +47,4 @@ export default function Aurora() {
     </>
   );
 }
+export default memo(Aurora);
