@@ -17,6 +17,7 @@ export default function CommandPalette({
   onClose,
 }: CommandPaletteProps) {
   const [search, setSearch] = useState("");
+  const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     if (!open) {
@@ -34,6 +35,13 @@ export default function CommandPalette({
       document.body.style.overflow = previousOverflow;
     };
   }, [open]);
+
+  // Auto-dismiss the toast so it never lingers if the visitor navigates away.
+  useEffect(() => {
+    if (!toast) return;
+    const timer = setTimeout(() => setToast(null), 4000);
+    return () => clearTimeout(timer);
+  }, [toast]);
 
   const handleSelect = (id: string) => {
     switch (id) {
@@ -81,7 +89,7 @@ export default function CommandPalette({
         navigator.clipboard.writeText(
           "afarrukh553@gmail.com"
         );
-        alert("Email copied to clipboard!");
+        setToast("Email copied to clipboard");
         break;
 
       case "sudo": {
@@ -98,21 +106,36 @@ export default function CommandPalette({
               Accept: "application/json",
             },
             body: JSON.stringify({
-              _subject: "🔓 Someone ran 'sudo hire' on your portfolio",
+              // No fake "email" field here on purpose — Formspree uses it to
+              // set the Reply-To header, and a Reply-To pointing at a domain
+              // with no real mailbox/SPF/DKIM is a strong spam signal.
+              name: "Portfolio Easter Egg",
               message:
-                "A visitor just triggered the sudo easter egg in your command palette.",
+                "A visitor triggered the sudo hire easter egg in your command palette.",
+              _subject: "Portfolio easter egg triggered",
               page: window.location.href,
               triggeredAt: new Date().toISOString(),
             }),
-          }).catch(() => {
-            // Best-effort notification only — don't let a failed request
-            // surface an error to the visitor triggering the easter egg.
-          });
+          })
+            .then(async (res) => {
+              if (!res.ok) {
+                const body = await res.json().catch(() => null);
+                console.error("Sudo notification rejected:", res.status, body);
+                return;
+              }
+
+              console.log("Sudo notification sent successfully.");
+            })
+            .catch((err) => {
+              console.error("Sudo notification network error:", err);
+            });
+        } else {
+          console.warn(
+            "NEXT_PUBLIC_FORMSPREE_FORM_ID is not set — sudo notification skipped."
+          );
         }
 
-        alert(
-          "🔓 Access Granted\n\nWelcome Recruiter 🙂\n\nLet's build something amazing."
-        );
+        setToast("Access granted — welcome, recruiter 🙂");
         break;
       }
     }
@@ -123,76 +146,124 @@ export default function CommandPalette({
   if (!open) return null;
 
   return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 z-100 flex items-start justify-center overflow-y-auto bg-black/50 px-4 py-[10vh] backdrop-blur-sm sm:py-24"
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 1,
-        }}
-        exit={{
-          opacity: 0,
-        }}
-        onClick={onClose}
-      >
+    <>
+      <AnimatePresence>
         <motion.div
+          className="fixed inset-0 z-100 flex items-start justify-center overflow-y-auto overscroll-contain bg-black/50 px-3 py-[8vh] backdrop-blur-sm sm:px-4 sm:py-24"
+          style={{ WebkitOverflowScrolling: "touch" }}
           initial={{
             opacity: 0,
-            y: -30,
-            scale: 0.95,
           }}
           animate={{
             opacity: 1,
-            y: 0,
-            scale: 1,
           }}
           exit={{
             opacity: 0,
-            y: -20,
-            scale: 0.95,
           }}
-          transition={{
-            duration: 0.2,
-          }}
-          onClick={(e) => e.stopPropagation()}
-          className="
-            w-full
-            max-w-2xl
-            overflow-hidden
-            rounded-2xl
-            border
-            border-white/10
-            bg-zinc-900/90
-            shadow-2xl
-            backdrop-blur-2xl
-          "
+          onClick={onClose}
         >
-          <Command
-            shouldFilter={false}
-            className="w-full"
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: -30,
+              scale: 0.95,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: -20,
+              scale: 0.95,
+            }}
+            transition={{
+              duration: 0.2,
+            }}
+            onClick={(e) => e.stopPropagation()}
+            className="
+              w-full
+              max-w-2xl
+              overflow-hidden
+              rounded-xl
+              border
+              border-white/10
+              bg-zinc-900/90
+              shadow-2xl
+              backdrop-blur-lg
+              sm:rounded-2xl
+              sm:backdrop-blur-2xl
+            "
           >
-            <SearchBar
-              value={search}
-              onValueChange={setSearch}
-            />
+            <Command
+              shouldFilter={false}
+              className="w-full"
+            >
+              <SearchBar
+                value={search}
+                onValueChange={setSearch}
+              />
 
-            <SearchResults
-              search={search}
-              onSelect={handleSelect}
-            />
-          </Command>
+              <SearchResults
+                search={search}
+                onSelect={handleSelect}
+              />
+            </Command>
 
-          <div className="flex items-center justify-between border-t border-white/10 px-4 py-3 text-xs text-zinc-500">
-            <span>↑ ↓ Navigate</span>
+            <div
+              className="flex items-center justify-between gap-2 border-t border-white/10 px-3 py-2.5 text-[10px] text-zinc-500 sm:px-4 sm:py-3 sm:text-xs"
+              style={{
+                paddingBottom: "max(0.625rem, env(safe-area-inset-bottom))",
+              }}
+            >
+              <span className="hidden sm:inline">↑ ↓ Navigate</span>
+              <span className="sm:hidden">Tap to select</span>
 
-            <span>Enter Select</span>
+              <span className="hidden sm:inline">Enter Select</span>
 
-            <span>Esc Close</span>
-          </div>
+              <span>Esc Close</span>
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </AnimatePresence>
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.2 }}
+            className="
+              fixed
+              inset-x-0
+              bottom-4
+              z-101
+              mx-auto
+              w-fit
+              max-w-[92vw]
+              rounded-full
+              border
+              border-white/10
+              bg-zinc-900/95
+              px-4
+              py-2.5
+              text-sm
+              text-zinc-100
+              shadow-2xl
+              backdrop-blur-xl
+              sm:bottom-8
+            "
+            style={{
+              marginBottom: "env(safe-area-inset-bottom)",
+            }}
+            role="status"
+          >
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
