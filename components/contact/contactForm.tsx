@@ -28,10 +28,10 @@ const FORMSPREE_ENDPOINT = `https://formspree.io/f/${process.env.NEXT_PUBLIC_FOR
 const MAX_MESSAGE_LENGTH = 500;
 
 const fieldClasses =
-  "peer w-full rounded-xl border border-white/10 bg-white/5 pl-14 pr-5 pt-6 pb-2 outline-none transition-all duration-300 focus:border-cyan-400 focus:shadow-[0_0_25px_rgba(34,211,238,.2)]";
+  "peer w-full rounded-xl border border-white/10 bg-white/5 pl-12 pr-4 pt-6 pb-2 text-sm outline-none transition-all duration-300 focus:border-cyan-400 focus:shadow-[0_0_25px_rgba(34,211,238,.2)] sm:pl-14 sm:pr-5 sm:text-base";
 
 const floatingLabelClasses =
-  "pointer-events-none absolute left-14 top-4 origin-left text-slate-400 transition-all duration-200 -translate-y-1 text-xs peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-base peer-focus:-translate-y-1 peer-focus:text-xs peer-focus:text-cyan-400";
+  "pointer-events-none absolute left-12 top-4 origin-left text-slate-400 transition-all duration-200 -translate-y-1 text-xs peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-sm peer-focus:-translate-y-1 peer-focus:text-xs peer-focus:text-cyan-400 sm:left-14 sm:peer-placeholder-shown:text-base";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -56,6 +56,7 @@ export default function ContactForm() {
   });
 
   function handleMouseMove(e: React.MouseEvent<HTMLFormElement>) {
+    if (window.matchMedia?.("(pointer: coarse)").matches) return;
     const rect = formRef.current?.getBoundingClientRect();
     if (!rect) return;
     mouseX.set((e.clientX - rect.left) / rect.width);
@@ -139,7 +140,7 @@ export default function ContactForm() {
         transformPerspective: 1200,
         transformStyle: "preserve-3d",
       }}
-      className="glass relative overflow-hidden rounded-3xl border border-white/10 p-8"
+      className="glass relative overflow-hidden rounded-2xl border border-white/10 p-5 sm:rounded-3xl sm:p-8"
     >
       {/* Background Glow */}
       <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-cyan-500/10 blur-[120px]" />
@@ -148,14 +149,16 @@ export default function ContactForm() {
         className="relative z-10"
         style={{ transform: "translateZ(24px)" }}
       >
-        <h3 className="text-3xl font-bold">Let's Build Something Amazing</h3>
+        <h3 className="text-2xl font-bold sm:text-3xl">
+          Let's Build Something Amazing
+        </h3>
 
-        <p className="mt-3 leading-7 text-slate-400">
+        <p className="mt-3 text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">
           Have an idea, opportunity, or project in mind? Fill out the form
           below and I'll get back to you as soon as possible.
         </p>
 
-        <div className="mt-10 space-y-6">
+        <div className="mt-7 space-y-5 sm:mt-10 sm:space-y-6">
           {/* Honeypot — hidden from real visitors, catches bots.
               Formspree silently drops any submission where this is filled. */}
           <input
@@ -163,7 +166,7 @@ export default function ContactForm() {
             name="_gotcha"
             tabIndex={-1}
             autoComplete="off"
-            className="absolute -left-[9999px] h-0 w-0 opacity-0"
+            className="absolute left-[-9999px] h-0 w-0 opacity-0"
             aria-hidden="true"
           />
           <input type="hidden" name="_subject" value="New Portfolio Contact" />
@@ -172,7 +175,7 @@ export default function ContactForm() {
           <div className="relative">
             <User
               size={20}
-              className="absolute left-5 top-1/2 text-cyan-400"
+              className="absolute left-4 top-1/2 text-cyan-400 sm:left-5"
               style={{ transform: "translateY(-50%) translateZ(16px)" }}
             />
             <input
@@ -191,7 +194,7 @@ export default function ContactForm() {
           <div className="relative">
             <Mail
               size={20}
-              className="absolute left-5 top-1/2 text-cyan-400"
+              className="absolute left-4 top-1/2 text-cyan-400 sm:left-5"
               style={{ transform: "translateY(-50%) translateZ(16px)" }}
             />
             <input
@@ -211,7 +214,7 @@ export default function ContactForm() {
           <div className="relative">
             <Pencil
               size={20}
-              className="absolute left-5 top-1/2 text-cyan-400"
+              className="absolute left-4 top-1/2 text-cyan-400 sm:left-5"
               style={{ transform: "translateY(-50%) translateZ(16px)" }}
             />
             <select
@@ -219,7 +222,7 @@ export default function ContactForm() {
               name="purpose"
               required
               defaultValue=""
-              className="w-full appearance-none rounded-xl border border-white/10 bg-white/5 py-4 pl-14 pr-5 text-white outline-none transition-all duration-300 focus:border-cyan-400 focus:shadow-[0_0_25px_rgba(34,211,238,.2)]"
+              className="w-full appearance-none rounded-xl border border-white/10 bg-white/5 py-4 pl-12 pr-4 text-sm text-white outline-none transition-all duration-300 focus:border-cyan-400 focus:shadow-[0_0_25px_rgba(34,211,238,.2)] sm:pl-14 sm:pr-5 sm:text-base"
             >
               <option value="" disabled>
                 Purpose of Contact
@@ -237,7 +240,7 @@ export default function ContactForm() {
           <div className="relative">
             <MessageSquare
               size={20}
-              className="absolute left-5 top-5 text-cyan-400"
+              className="absolute left-4 top-5 text-cyan-400 sm:left-5"
               style={{ transform: "translateZ(16px)" }}
             />
             <textarea
@@ -248,7 +251,7 @@ export default function ContactForm() {
               maxLength={MAX_MESSAGE_LENGTH}
               placeholder="Tell me about your project, opportunity, or idea..."
               onChange={(e) => setMessageLength(e.target.value.length)}
-              className="w-full resize-none rounded-xl border border-white/10 bg-white/5 py-4 pl-14 pr-5 pb-8 outline-none transition-all duration-300 focus:border-cyan-400 focus:shadow-[0_0_25px_rgba(34,211,238,.2)]"
+              className="w-full resize-none rounded-xl border border-white/10 bg-white/5 py-4 pl-12 pr-4 pb-8 text-sm outline-none transition-all duration-300 focus:border-cyan-400 focus:shadow-[0_0_25px_rgba(34,211,238,.2)] sm:pl-14 sm:pr-5 sm:text-base"
             />
             <span className="pointer-events-none absolute bottom-3 right-5 text-xs text-slate-500">
               {messageLength}/{MAX_MESSAGE_LENGTH}
@@ -265,7 +268,7 @@ export default function ContactForm() {
               exit={{ opacity: 0, y: -8, height: 0 }}
               className="mt-6 flex items-start gap-3 rounded-xl border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-300"
             >
-              <AlertCircle size={18} className="mt-0.5 flex-shrink-0" />
+              <AlertCircle size={18} className="mt-0.5 shrink-0" />
               <p>{errorMessage}</p>
             </motion.div>
           )}
@@ -273,7 +276,7 @@ export default function ContactForm() {
 
         {/* Submit */}
         <div
-          className="relative mt-10"
+          className="relative mt-7 sm:mt-10"
           style={{ transform: "translateZ(20px)" }}
         >
           <motion.div
@@ -287,7 +290,7 @@ export default function ContactForm() {
             disabled={loading}
             whileHover={!loading && !success ? { scale: 1.03 } : {}}
             whileTap={{ scale: 0.97 }}
-            className="group relative flex h-14 w-full items-center justify-center rounded-full bg-cyan-400 font-semibold text-slate-950 shadow-[0_0_40px_rgba(34,211,238,.35)] disabled:cursor-not-allowed disabled:opacity-80"
+            className="group relative flex h-12 w-full items-center justify-center rounded-full bg-cyan-400 text-sm font-semibold text-slate-950 shadow-[0_0_40px_rgba(34,211,238,.35)] disabled:cursor-not-allowed disabled:opacity-80 sm:h-14 sm:text-base"
           >
             <AnimatePresence mode="wait">
               {status === "idle" && (

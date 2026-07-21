@@ -8,6 +8,8 @@ import {
 } from "framer-motion";
 import { useEffect, useRef } from "react";
 
+import { useHasFinePointer } from "./useMediaQuery";
+
 interface Stat {
   value: number;
   suffix: string;
@@ -51,9 +53,11 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 }
 
 export default function StatsCounter() {
+  const hasFinePointer = useHasFinePointer();
+
   return (
-    <section className="mt-20">
-      <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+    <section className="mt-12 sm:mt-16 lg:mt-20">
+      <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-4">
         {stats.map((stat, index) => (
           <motion.div
             key={stat.label}
@@ -61,16 +65,16 @@ export default function StatsCounter() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            whileHover={{ y: -6 }}
-            className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 text-center backdrop-blur-xl transition-colors duration-300 hover:border-cyan-400/30"
+            whileHover={hasFinePointer ? { y: -6 } : undefined}
+            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/3 p-4 text-center backdrop-blur-md transition-colors duration-300 hover:border-cyan-400/30 sm:rounded-3xl sm:p-8"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-purple-500/0 opacity-0 transition duration-500 group-hover:from-cyan-400/5 group-hover:to-purple-500/5 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-br from-cyan-400/0 to-purple-500/0 opacity-0 transition duration-500 group-hover:from-cyan-400/5 group-hover:to-purple-500/5 group-hover:opacity-100" />
 
-            <p className="relative z-10 text-4xl font-black text-gradient md:text-5xl">
+            <p className="relative z-10 text-2xl font-black text-gradient sm:text-4xl md:text-5xl">
               <Counter value={stat.value} suffix={stat.suffix} />
             </p>
 
-            <p className="relative z-10 mt-3 text-sm uppercase tracking-[0.15em] text-slate-400">
+            <p className="relative z-10 mt-2 text-[11px] uppercase leading-tight tracking-widest text-slate-400 sm:mt-3 sm:text-sm sm:tracking-[0.15em]">
               {stat.label}
             </p>
           </motion.div>

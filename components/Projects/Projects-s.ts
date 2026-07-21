@@ -42,7 +42,7 @@ export const Projects: Project[] = [
   category: "webdev",
 
   github: "https://github.com/farrukhh31/My-Portfolio",
-  demo: "https://your-portfolio-url.com",
+  demo: "https://my-portfolio-tdj6.vercel.app/",
 
   featured: true,
 },
@@ -76,8 +76,8 @@ export const Projects: Project[] = [
   description:
     "A collection of responsive and interactive frontend applications built with modern web technologies, focusing on clean UI, smooth user experience, and performance.",
 
-  image: "/images/frontend.png",
-  hoverImage: "/images/frontend-hover.png",
+  image: "/images/frontend.PNG",
+  hoverImage: "/images/frontend-hover.PNG",
 
   highlight:
     "Developed modern, responsive interfaces with reusable components, interactive animations, and optimized performance across desktop and mobile devices.",

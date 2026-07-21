@@ -69,7 +69,7 @@ export default function Footer() {
           <FooterLogo />
 
           <div className="mt-8 flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-gradient-to-r from-transparent to-cyan-400/60" />
+            <span className="h-px w-8 bg-linear-to-r from-transparent to-cyan-400/60" />
             <span className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-300/80">
               Get In Touch
             </span>

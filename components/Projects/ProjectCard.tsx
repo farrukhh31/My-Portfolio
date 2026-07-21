@@ -81,7 +81,7 @@ export default function ProjectCard({ project, index = 0 }: Props) {
         >
           {/* Category-colored top edge — reveals on hover, the card's discipline "handle" */}
           <div
-            className={`absolute inset-x-0 top-0 z-20 h-[3px] scale-x-0 bg-gradient-to-r ${style.gradientBar} transition-transform duration-500 ease-out group-hover:scale-x-100`}
+            className={`absolute inset-x-0 top-0 z-20 h-0.75 scale-x-0 bg-linear-to-r ${style.gradientBar} transition-transform duration-500 ease-out group-hover:scale-x-100`}
           />
 
           {/* Cursor-tracking spotlight */}
@@ -98,7 +98,7 @@ export default function ProjectCard({ project, index = 0 }: Props) {
 
           <div className="absolute right-6 top-6 z-20 flex items-center gap-2">
             {project.featured && (
-              <span className="rounded-full border border-amber-300/40 bg-gradient-to-r from-amber-300/20 to-yellow-200/10 px-3 py-1 text-xs font-medium tracking-wide text-amber-200 backdrop-blur-sm">
+              <span className="rounded-full border border-amber-300/40 bg-linear-to-r from-amber-300/20 to-yellow-200/10 px-3 py-1 text-xs font-medium tracking-wide text-amber-200 backdrop-blur-sm">
                 Featured
               </span>
             )}
@@ -133,7 +133,7 @@ export default function ProjectCard({ project, index = 0 }: Props) {
               />
             </motion.div>
 
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/30 to-transparent" />
 
             {/* Center play button overlay for video projects — reads instantly as "watch, don't click through" */}
             {hasVideo && (

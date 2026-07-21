@@ -1,7 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import {
   ChevronLeft,
   ChevronRight,
@@ -22,6 +28,7 @@ export default function CertificateHero({
   onNext,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -45,7 +52,7 @@ export default function CertificateHero({
   function handleMove(
     e: React.MouseEvent<HTMLDivElement>
   ) {
-    if (!ref.current) return;
+    if (!ref.current || shouldReduceMotion) return;
 
     const rect =
       ref.current.getBoundingClientRect();
@@ -69,53 +76,80 @@ export default function CertificateHero({
   }
 
   return (
-    <div className="relative flex justify-center">
+    <div className="relative flex justify-center px-10 sm:px-12 lg:px-0">
 
       {/* Background Glow */}
 
       <motion.div
-        animate={{
-          scale: [1, 1.12, 1],
-          opacity: [0.35, 0.7, 0.35],
-        }}
+        animate={
+          shouldReduceMotion
+            ? {}
+            : {
+                scale: [1, 1.12, 1],
+                opacity: [0.35, 0.7, 0.35],
+              }
+        }
         transition={{
           duration: 7,
           repeat: Infinity,
           ease: "easeInOut",
         }}
         className="
+          pointer-events-none
           absolute
           left-1/2
           top-1/2
-          h-[650px]
-          w-[650px]
+          h-70
+          w-70
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           bg-cyan-500/15
-          blur-[180px]
+          blur-[90px]
+          transform-gpu
+          will-change-transform
+          sm:h-105
+          sm:w-105
+          sm:blur-[130px]
+          lg:h-162.5
+          lg:w-162.5
+          lg:blur-[180px]
         "
       />
 
       <motion.div
-        animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.15, 0.3, 0.15],
-        }}
+        animate={
+          shouldReduceMotion
+            ? {}
+            : {
+                scale: [1, 1.15, 1],
+                opacity: [0.15, 0.3, 0.15],
+              }
+        }
         transition={{
           duration: 9,
           repeat: Infinity,
           ease: "easeInOut",
         }}
         className="
+          pointer-events-none
           absolute
           bottom-0
-          right-10
-          h-[400px]
-          w-[400px]
+          right-4
+          h-45
+          w-45
           rounded-full
           bg-violet-600/15
-          blur-[150px]
+          blur-[80px]
+          transform-gpu
+          will-change-transform
+          sm:right-10
+          sm:h-70
+          sm:w-70
+          sm:blur-[110px]
+          lg:h-100
+          lg:w-100
+          lg:blur-[150px]
         "
       />
 
@@ -130,24 +164,27 @@ export default function CertificateHero({
           scale: .95,
         }}
         onClick={onPrevious}
+        aria-label="Previous certificate"
         className="
           absolute
           left-0
           top-1/2
           z-30
-          -translate-x-1/2
           -translate-y-1/2
           rounded-full
           border
           border-white/10
           bg-slate-900/70
-          p-4
+          p-2.5
           backdrop-blur-xl
           transition
           hover:border-cyan-400
+          sm:p-3
+          lg:-translate-x-1/2
+          lg:p-4
         "
       >
-        <ChevronLeft />
+        <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
       </motion.button>
 
       {/* Next */}
@@ -161,24 +198,27 @@ export default function CertificateHero({
           scale: .95,
         }}
         onClick={onNext}
+        aria-label="Next certificate"
         className="
           absolute
           right-0
           top-1/2
           z-30
-          translate-x-1/2
           -translate-y-1/2
           rounded-full
           border
           border-white/10
           bg-slate-900/70
-          p-4
+          p-2.5
           backdrop-blur-xl
           transition
           hover:border-cyan-400
+          sm:p-3
+          lg:translate-x-1/2
+          lg:p-4
         "
       >
-        <ChevronRight />
+        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
       </motion.button>
 
       {/* Hero Card */}
@@ -187,9 +227,13 @@ export default function CertificateHero({
         ref={ref}
         onMouseMove={handleMove}
         onMouseLeave={reset}
-        animate={{
-          y: [0, -10, 0],
-        }}
+        animate={
+          shouldReduceMotion
+            ? {}
+            : {
+                y: [0, -10, 0],
+              }
+        }
         transition={{
           y: {
             repeat: Infinity,
@@ -206,17 +250,19 @@ export default function CertificateHero({
           group
           relative
           w-full
-          max-w-[650px]
+          max-w-162.5
+          transform-gpu
+          will-change-transform
         "
       >
-                {/* Animated Glow Border */}
+        {/* Animated Glow Border */}
 
         <div
           className="
             absolute
-            -inset-[2px]
-            rounded-[38px]
-            bg-gradient-to-r
+            -inset-0.5
+            rounded-3xl
+            bg-linear-to-r
             from-cyan-500
             via-violet-500
             to-cyan-500
@@ -225,6 +271,7 @@ export default function CertificateHero({
             transition-all
             duration-500
             group-hover:opacity-70
+            sm:rounded-[38px]
           "
         />
 
@@ -234,18 +281,20 @@ export default function CertificateHero({
           className="
             relative
             overflow-hidden
-            rounded-[36px]
+            rounded-[22px]
             border
             border-white/10
-            bg-white/[0.05]
+            bg-white/5
             backdrop-blur-3xl
-            shadow-[0_35px_90px_rgba(0,0,0,.45)]
+            shadow-[0_20px_60px_rgba(0,0,0,.4)]
+            sm:rounded-[36px]
+            sm:shadow-[0_35px_90px_rgba(0,0,0,.45)]
           "
         >
           {/* Animated Grid */}
 
           <div
-            className="absolute inset-0 opacity-[0.04]"
+            className="pointer-events-none absolute inset-0 opacity-[0.04]"
             style={{
               backgroundImage:
                 "linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px)",
@@ -255,27 +304,31 @@ export default function CertificateHero({
 
           {/* Reflection */}
 
-          <motion.div
-            animate={{
-              x: ["-120%", "220%"],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 7,
-              ease: "linear",
-            }}
-            className="
-              pointer-events-none
-              absolute
-              inset-y-0
-              w-40
-              rotate-12
-              bg-gradient-to-r
-              from-transparent
-              via-white/15
-              to-transparent
-            "
-          />
+          {!shouldReduceMotion && (
+            <motion.div
+              animate={{
+                x: ["-120%", "220%"],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 7,
+                ease: "linear",
+              }}
+              className="
+                pointer-events-none
+                absolute
+                inset-y-0
+                w-24
+                rotate-12
+                bg-linear-to-r
+                from-transparent
+                via-white/15
+                to-transparent
+                will-change-transform
+                sm:w-40
+              "
+            />
+          )}
 
           {/* Certificate */}
 
@@ -284,10 +337,12 @@ export default function CertificateHero({
               relative
               aspect-[1.414/1]
               overflow-hidden
-              rounded-[28px]
-              m-5
+              rounded-2xl
+              m-2.5
               border
               border-white/10
+              sm:m-5
+              sm:rounded-[28px]
             "
           >
             <motion.div
@@ -326,24 +381,28 @@ export default function CertificateHero({
                   justify-center
                   bg-slate-950/70
                   backdrop-blur-md
+                  p-3
                 "
               >
                 <div
                   className="
-                    rounded-2xl
+                    rounded-xl
                     border
                     border-amber-400/30
                     bg-amber-500/10
-                    px-6
-                    py-4
+                    px-3
+                    py-2
                     text-center
+                    sm:rounded-2xl
+                    sm:px-6
+                    sm:py-4
                   "
                 >
-                  <p className="text-lg font-semibold text-amber-300">
+                  <p className="text-xs font-semibold text-amber-300 sm:text-lg">
                     🚧 Certificate In Progress
                   </p>
 
-                  <p className="mt-2 text-sm text-slate-300">
+                  <p className="mt-1 hidden text-sm text-slate-300 sm:mt-2 sm:block">
                     The official certificate
                     <br />
                     will be available after completion.
@@ -357,12 +416,13 @@ export default function CertificateHero({
 
           <div
             className="
-              h-[3px]
+              h-0.5
               w-full
-              bg-gradient-to-r
+              bg-linear-to-r
               from-cyan-400
               via-violet-500
               to-cyan-400
+              sm:h-0.75
             "
           />
         </div>

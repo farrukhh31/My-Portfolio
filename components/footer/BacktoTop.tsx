@@ -114,7 +114,7 @@ export default function BackToTop() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.7, y: 30 }}
           style={{ bottom: springBottom }}
-          className="fixed right-5 z-[999] sm:right-8"
+          className="fixed right-5 z-999 sm:right-8"
           onMouseMove={handlePointerMove}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={resetPointer}

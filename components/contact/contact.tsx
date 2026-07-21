@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative isolate py-40">
+    <section id="contact" className="relative isolate py-20 sm:py-28 lg:py-40">
       {/* Decorative background layer — clipped on its own so it never
           bleeds outside the section, without clipping foreground content
           like the orbiting badges below. */}
@@ -17,7 +17,7 @@ export default function Contact() {
         {/* 3D floor grid — a plane tilted in real perspective, fading
             upward, like a horizon line. Purely decorative. */}
         <div
-          className="absolute inset-x-0 bottom-0 h-[420px]"
+          className="absolute inset-x-0 bottom-0 h-105"
           style={{ perspective: "600px" }}
         >
           <div
@@ -55,7 +55,7 @@ export default function Contact() {
 
           <ContactOrbit />
 
-          <div className="mt-6 grid gap-10 lg:grid-cols-2">
+          <div className="mt-6 grid gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-10">
             <ContactCard />
             <ContactForm />
           </div>

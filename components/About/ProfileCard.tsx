@@ -12,6 +12,8 @@ import {
   Share2,
 } from "lucide-react";
 
+import { useHasFinePointer } from "./useMediaQuery";
+
 const items = [
   {
     icon: User,
@@ -42,18 +44,18 @@ const socials = [
 ];
 
 export default function ProfileCard() {
+  const hasFinePointer = useHasFinePointer();
+
   return (
     <motion.div
-      whileHover={{
-        y: -8,
-      }}
-      className="glass relative overflow-hidden rounded-3xl border border-white/10 p-8"
+      whileHover={hasFinePointer ? { y: -8 } : undefined}
+      className="glass relative overflow-hidden rounded-3xl border border-white/10 p-6 sm:p-8"
     >
       {/* Ambient glow */}
-      <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-cyan-400/10 blur-[90px]" />
+      <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-cyan-400/10 blur-[60px] sm:h-56 sm:w-56 sm:blur-[90px]" />
 
-      <div className="relative z-10 flex items-start justify-between">
-        <h3 className="text-2xl font-bold">
+      <div className="relative z-10 flex flex-wrap items-start justify-between gap-3">
+        <h3 className="text-xl font-bold sm:text-2xl">
           Profile
         </h3>
 
@@ -66,11 +68,11 @@ export default function ProfileCard() {
         </span>
       </div>
 
-      <div className="relative z-10 mt-8 space-y-6">
+      <div className="relative z-10 mt-6 space-y-5 sm:mt-8 sm:space-y-6">
         {items.map((item) => (
           <div
             key={item.title}
-            className="flex items-center gap-5"
+            className="flex items-center gap-4 sm:gap-5"
           >
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-400/10">
               <item.icon size={18} className="text-cyan-400" />
@@ -88,14 +90,14 @@ export default function ProfileCard() {
       </div>
 
       {/* Divider */}
-      <div className="relative z-10 my-8 h-px w-full bg-white/10" />
+      <div className="relative z-10 my-6 h-px w-full bg-white/10 sm:my-8" />
 
       {/* Actions */}
       <div className="relative z-10 flex flex-wrap items-center gap-3">
         <a
           href="/Farrukh_Ahmad_Resume.pdf"
           download="Farrukh_Ahmad_Resume.pdf"
-          className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-400 to-purple-500 px-5 py-3 text-sm font-semibold text-slate-950 transition-transform duration-300 hover:scale-[1.03]"
+          className="flex items-center gap-2 rounded-2xl bg-linear-to-r from-cyan-400 to-purple-500 px-5 py-3 text-sm font-semibold text-slate-950 transition-transform duration-300 hover:scale-[1.03]"
         >
           <Download size={16} />
           Download Resume

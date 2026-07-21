@@ -52,7 +52,7 @@ export default function LiveClock() {
         border
         border-white/10
 
-        bg-white/[0.05]
+        bg-white/5
 
         px-4
         py-2
@@ -75,7 +75,7 @@ export default function LiveClock() {
 
           opacity-0
 
-          bg-gradient-to-r
+          bg-linear-to-r
           from-purple-500/10
           via-transparent
           to-cyan-500/10

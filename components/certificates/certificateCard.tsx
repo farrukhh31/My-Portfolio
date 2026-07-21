@@ -34,50 +34,56 @@ export default function CertificateCard({
     <div
       className={`
         relative
-        w-[340px]
+        w-[78vw]
+        max-w-75
         overflow-hidden
-        rounded-[32px]
+        rounded-3xl
         border
         backdrop-blur-2xl
         transition-all
         duration-500
+        sm:w-85
+        sm:max-w-none
+        sm:rounded-4xl
 
         ${
           active
-            ? "border-cyan-400/40 bg-white/[0.06] shadow-[0_0_60px_rgba(34,211,238,.18)]"
-            : "border-white/10 bg-white/[0.03] opacity-70"
+            ? "border-cyan-400/40 bg-white/6 shadow-[0_0_60px_rgba(34,211,238,.18)]"
+            : "border-white/10 bg-white/3 opacity-70"
         }
       `}
     >
       {/* Background Glow */}
 
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-fuchsia-500/10" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-cyan-400/10 via-transparent to-fuchsia-500/10" />
 
-      <div className="relative p-7">
+      <div className="relative p-5 sm:p-7">
 
         {/* Header */}
 
         <div className="flex items-start justify-between">
 
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-400/10">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-400/10 sm:h-16 sm:w-16">
 
-            <Icon
-              size={30}
-              className="text-cyan-400"
-            />
+            <Icon className="h-6 w-6 text-cyan-400 sm:h-8 sm:w-8" />
 
           </div>
 
           {completed ? (
-            <span className="flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
-              <CheckCircle2 size={14} />
+            <span className="flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1 text-[11px] text-emerald-300 sm:gap-2 sm:px-3 sm:text-xs">
+              <CheckCircle2 size={12} className="sm:hidden" />
+              <CheckCircle2 size={14} className="hidden sm:block" />
               Completed
             </span>
           ) : (
-            <span className="flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-xs text-amber-300">
+            <span className="flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 text-[11px] text-amber-300 sm:gap-2 sm:px-3 sm:text-xs">
+              <Loader2
+                size={12}
+                className="animate-spin sm:hidden"
+              />
               <Loader2
                 size={14}
-                className="animate-spin"
+                className="hidden animate-spin sm:block"
               />
               In Progress
             </span>
@@ -86,30 +92,30 @@ export default function CertificateCard({
 
         {/* Title */}
 
-        <h3 className="mt-8 text-2xl font-bold leading-tight text-white">
+        <h3 className="mt-5 line-clamp-2 text-lg font-bold leading-tight text-white sm:mt-8 sm:text-2xl">
           {certificate.title}
         </h3>
 
-        <p className="mt-2 text-slate-400">
+        <p className="mt-1.5 text-sm text-slate-400 sm:mt-2 sm:text-base">
           {certificate.issuer}
         </p>
 
         {/* Description */}
 
         {certificate.description && (
-          <p className="mt-5 text-sm leading-7 text-slate-400">
+          <p className="mt-3 line-clamp-3 text-xs leading-6 text-slate-400 sm:mt-5 sm:text-sm sm:leading-7">
             {certificate.description}
           </p>
         )}
 
         {/* Skills */}
 
-        <div className="mt-7 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap gap-1.5 sm:mt-7 sm:gap-2">
 
           {certificate.skills.map((skill) => (
             <span
               key={skill}
-              className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-300"
+              className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-2.5 py-1 text-[10px] text-cyan-300 sm:px-3 sm:text-xs"
             >
               {skill}
             </span>
@@ -121,12 +127,12 @@ export default function CertificateCard({
 
         {!completed && typeof certificate.progress === "number" && (
 
-          <div className="mt-8">
+          <div className="mt-5 sm:mt-8">
 
             <div className="h-2 overflow-hidden rounded-full bg-white/10">
 
               <div
-                className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-500"
+                className="h-full rounded-full bg-linear-to-r from-cyan-400 to-fuchsia-500"
                 style={{
                   width: `${certificate.progress}%`,
                 }}
@@ -134,7 +140,7 @@ export default function CertificateCard({
 
             </div>
 
-            <div className="mt-2 flex justify-between text-xs">
+            <div className="mt-2 flex justify-between text-[11px] sm:text-xs">
 
               <span className="text-slate-500">
                 Progress
@@ -152,9 +158,9 @@ export default function CertificateCard({
 
         {/* Footer */}
 
-        <div className="mt-10 flex items-center justify-between">
+        <div className="mt-6 flex items-center justify-between gap-2 sm:mt-10">
 
-          <span className="rounded-full border border-white/10 px-4 py-2 text-sm text-slate-400">
+          <span className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-slate-400 sm:px-4 sm:py-2 sm:text-sm">
             {completed
               ? certificate.year
               : certificate.expectedCompletion}
@@ -165,17 +171,18 @@ export default function CertificateCard({
             <Link
               href={certificate.pdf ?? "#"}
               target="_blank"
-              className="flex items-center gap-2 rounded-full bg-cyan-500 px-5 py-2 text-sm font-medium text-slate-950 transition hover:bg-cyan-400"
+              className="flex items-center gap-1.5 rounded-full bg-cyan-500 px-4 py-1.5 text-xs font-medium text-slate-950 transition hover:bg-cyan-400 sm:gap-2 sm:px-5 sm:py-2 sm:text-sm"
             >
               View
 
-              <ArrowUpRight size={16} />
+              <ArrowUpRight size={14} className="sm:hidden" />
+              <ArrowUpRight size={16} className="hidden sm:block" />
 
             </Link>
 
           ) : (
 
-            <span className="text-sm text-amber-300">
+            <span className="text-xs text-amber-300 sm:text-sm">
               Ongoing
             </span>
 

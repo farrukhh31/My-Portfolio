@@ -135,7 +135,7 @@ export default function Navbar() {
           z-50
 
           w-[95%]
-          max-w-[1400px]
+          max-w-350
 
           rounded-3xl
 
@@ -176,7 +176,7 @@ export default function Navbar() {
 
                 rounded-2xl
 
-                bg-gradient-to-br
+                bg-linear-to-br
                 from-purple-500
                 via-indigo-500
                 to-cyan-500
@@ -242,7 +242,7 @@ export default function Navbar() {
                       border
                       border-purple-400/20
 
-                      bg-gradient-to-r
+                      bg-linear-to-r
                       from-purple-500/20
                       via-indigo-500/20
                       to-cyan-500/20
@@ -282,7 +282,7 @@ export default function Navbar() {
 
                   rounded-full
 
-                  bg-gradient-to-r
+                  bg-linear-to-r
                   from-purple-600
                   to-indigo-600
 
@@ -325,7 +325,7 @@ export default function Navbar() {
                 border
                 border-white/10
 
-                bg-white/[0.04]
+                bg-white/4
 
                 px-3
                 py-2
@@ -368,7 +368,7 @@ export default function Navbar() {
                 border
                 border-white/10
 
-                bg-white/[0.04]
+                bg-white/4
 
                 px-3
                 py-2
@@ -481,7 +481,7 @@ export default function Navbar() {
 
                     rounded-xl
 
-                    bg-gradient-to-r
+                    bg-linear-to-r
                     from-purple-600
                     to-indigo-600
 

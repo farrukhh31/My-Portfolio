@@ -103,27 +103,27 @@ export default function ExpertiseDomains() {
   return (
     <section className="mt-28">
 
-      <div className="mb-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+      <div className="mb-10 flex flex-col items-start justify-between gap-6 sm:mb-14 md:flex-row md:items-end">
         <div>
-          <p className="uppercase tracking-[0.35em] text-cyan-400">
+          <p className="text-sm uppercase tracking-[0.35em] text-cyan-400">
             What I Do
           </p>
 
-          <h3 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
+          <h3 className="mt-4 text-3xl font-black leading-tight sm:text-4xl md:text-5xl">
             Four disciplines,
             <br className="hidden md:block" />
             <span className="text-gradient"> one engineer.</span>
           </h3>
         </div>
 
-        <p className="max-w-md text-slate-400">
+        <p className="max-w-md text-sm text-slate-400 sm:text-base">
           Pick a field to see how I actually work in it — the tools,
           the habits, and what I focus on delivering.
         </p>
       </div>
 
       {/* Tab Selector */}
-      <div className="flex flex-wrap gap-3 border-b border-white/10 pb-6">
+      <div className="flex flex-wrap gap-2 border-b border-white/10 pb-6 sm:gap-3">
         {domains.map((domain) => {
           const Icon = domain.icon;
           const isActive = domain.id === active;
@@ -133,12 +133,12 @@ export default function ExpertiseDomains() {
               key={domain.id}
               onClick={() => setActive(domain.id)}
               className={`
-                group relative flex items-center gap-3 rounded-2xl border px-5 py-3
-                transition-all duration-300
+                group relative flex items-center gap-2 rounded-2xl border px-3.5 py-2.5
+                transition-all duration-300 sm:gap-3 sm:px-5 sm:py-3
                 ${
                   isActive
                     ? "border-cyan-400/50 bg-cyan-400/10 shadow-[0_0_35px_rgba(34,211,238,.2)]"
-                    : "border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.05]"
+                    : "border-white/10 bg-white/2 hover:border-white/20 hover:bg-white/5"
                 }
               `}
             >
@@ -161,10 +161,10 @@ export default function ExpertiseDomains() {
               </span>
 
               {isActive && (
-                <motion.div
-                  layoutId="expertise-underline"
-                  className="absolute -bottom-[25px] left-0 h-[2px] w-full bg-gradient-to-r from-cyan-400 to-purple-500"
-                />
+              <motion.div
+                layoutId="expertise-underline"
+                className="absolute -bottom-6.25 left-0 h-0.5 w-full bg-linear-to-r from-cyan-400 to-purple-500"
+              />
               )}
             </button>
           );
@@ -172,10 +172,10 @@ export default function ExpertiseDomains() {
       </div>
 
       {/* Panel */}
-      <div className="relative mt-10 overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] p-8 backdrop-blur-2xl md:p-12">
+      <div className="relative mt-8 overflow-hidden rounded-3xl border border-white/10 bg-white/3 p-5 backdrop-blur-xl sm:mt-10 sm:rounded-4xl sm:p-8 md:p-12">
 
-        <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-cyan-400/10 blur-[100px]" />
-        <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-purple-500/10 blur-[100px]" />
+        <div className="absolute -right-24 -top-24 h-56 w-56 rounded-full bg-cyan-400/10 blur-[60px] sm:h-72 sm:w-72 sm:blur-[100px]" />
+        <div className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full bg-purple-500/10 blur-[60px] sm:h-72 sm:w-72 sm:blur-[100px]" />
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -184,23 +184,24 @@ export default function ExpertiseDomains() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="relative z-10 grid gap-12 lg:grid-cols-[1.1fr_0.9fr]"
+            className="relative z-10 grid gap-8 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr]"
           >
             {/* Left: description + features */}
             <div>
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-400/10">
-                <current.icon size={28} className="text-cyan-400" />
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-400/10 sm:mb-6 sm:h-14 sm:w-14">
+                <current.icon size={24} className="text-cyan-400 sm:hidden" />
+                <current.icon size={28} className="hidden text-cyan-400 sm:block" />
               </div>
 
-              <h4 className="text-3xl font-bold">
+              <h4 className="text-2xl font-bold sm:text-3xl">
                 {current.headline}
               </h4>
 
-              <p className="mt-5 max-w-xl leading-8 text-slate-400">
+              <p className="mt-4 max-w-xl leading-7 text-slate-400 sm:mt-5 sm:leading-8">
                 {current.description}
               </p>
 
-              <ul className="mt-8 space-y-4">
+              <ul className="mt-6 space-y-3 sm:mt-8 sm:space-y-4">
                 {current.features.map((feature) => (
                   <li
                     key={feature}
@@ -218,7 +219,7 @@ export default function ExpertiseDomains() {
 
             {/* Right: stack + metric */}
             <div className="flex flex-col justify-between gap-8">
-              <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+              <div className="rounded-3xl border border-white/10 bg-white/3 p-6">
                 <p className="flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-slate-500">
                   <Layers size={14} className="text-cyan-400" />
                   Tools I reach for
@@ -236,7 +237,7 @@ export default function ExpertiseDomains() {
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 p-6">
+              <div className="rounded-3xl border border-cyan-400/20 bg-linear-to-br from-cyan-400/10 to-purple-500/10 p-6">
                 <p className="text-4xl font-black text-white">
                   {current.metric.value}
                 </p>

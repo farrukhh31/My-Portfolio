@@ -30,23 +30,27 @@ export default function CertificateStrip({
         duration: 0.5,
       }}
       className="
-        mt-10
+        mt-6
         flex
         justify-center
+        sm:mt-10
       "
     >
       <div
         className="
           flex
           max-w-full
-          gap-5
+          gap-3
           overflow-x-auto
-          rounded-3xl
+          rounded-2xl
           border
           border-white/10
-          bg-white/[0.03]
-          p-4
+          bg-white/3
+          p-3
           backdrop-blur-xl
+          sm:gap-5
+          sm:rounded-3xl
+          sm:p-4
 
           scrollbar-hide
         "

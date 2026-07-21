@@ -59,32 +59,43 @@ export default function CertificateDetails({
         className="
           relative
           flex
-          h-[480px]
-          sm:h-[520px]
-          lg:h-[560px]
+          h-95
+          sm:h-120
+          lg:h-140
           flex-col
           overflow-hidden
-          rounded-[32px]
+          rounded-[22px]
           border
           border-white/10
-          bg-white/[0.04]
-          p-8
+          bg-white/4
+          p-5
           backdrop-blur-2xl
-          shadow-[0_25px_70px_rgba(0,0,0,.35)]
+          shadow-[0_15px_45px_rgba(0,0,0,.3)]
+          sm:rounded-[28px]
+          sm:p-6
+          sm:shadow-[0_25px_70px_rgba(0,0,0,.35)]
+          lg:rounded-4xl
+          lg:p-8
         "
       >
         {/* Background Glow */}
 
         <div
           className="
+            pointer-events-none
             absolute
-            -right-24
-            -top-24
-            h-60
-            w-60
+            -right-16
+            -top-16
+            h-40
+            w-40
             rounded-full
             bg-cyan-500/10
-            blur-[120px]
+            blur-[90px]
+            sm:-right-24
+            sm:-top-24
+            sm:h-60
+            sm:w-60
+            sm:blur-[120px]
           "
         />
 
@@ -99,18 +110,23 @@ export default function CertificateDetails({
                 className="
                   flex
                   items-center
-                  gap-2
+                  gap-1.5
                   rounded-full
                   border
                   border-emerald-400/30
                   bg-emerald-400/10
-                  px-4
-                  py-2
-                  text-sm
+                  px-3
+                  py-1.5
+                  text-xs
                   text-emerald-300
+                  sm:gap-2
+                  sm:px-4
+                  sm:py-2
+                  sm:text-sm
                 "
               >
-                <CheckCircle2 size={16} />
+                <CheckCircle2 size={14} className="sm:hidden" />
+                <CheckCircle2 size={16} className="hidden sm:block" />
                 Completed
               </span>
             ) : (
@@ -118,20 +134,28 @@ export default function CertificateDetails({
                 className="
                   flex
                   items-center
-                  gap-2
+                  gap-1.5
                   rounded-full
                   border
                   border-amber-400/30
                   bg-amber-400/10
-                  px-4
-                  py-2
-                  text-sm
+                  px-3
+                  py-1.5
+                  text-xs
                   text-amber-300
+                  sm:gap-2
+                  sm:px-4
+                  sm:py-2
+                  sm:text-sm
                 "
               >
                 <Loader2
+                  size={14}
+                  className="animate-spin sm:hidden"
+                />
+                <Loader2
                   size={16}
-                  className="animate-spin"
+                  className="hidden animate-spin sm:block"
                 />
 
                 In Progress
@@ -142,11 +166,15 @@ export default function CertificateDetails({
               className="
                 flex
                 items-center
-                gap-2
+                gap-1.5
+                text-sm
                 text-slate-400
+                sm:gap-2
+                sm:text-base
               "
             >
-              <Calendar size={16} />
+              <Calendar size={14} className="sm:hidden" />
+              <Calendar size={16} className="hidden sm:block" />
               {certificate.year}
             </div>
 
@@ -156,13 +184,17 @@ export default function CertificateDetails({
 
           <h2
             className="
-              mt-8
+              mt-5
               shrink-0
               line-clamp-2
-              text-3xl
+              text-xl
               font-bold
               leading-tight
               text-white
+              sm:mt-6
+              sm:text-2xl
+              lg:mt-8
+              lg:text-3xl
             "
           >
             {certificate.title}
@@ -173,7 +205,9 @@ export default function CertificateDetails({
               mt-2
               shrink-0
               line-clamp-1
+              text-sm
               text-cyan-300
+              sm:text-base
             "
           >
             {certificate.issuer}
@@ -183,14 +217,17 @@ export default function CertificateDetails({
               content length varies per certificate, so this region absorbs
               that difference instead of resizing the card itself. */}
 
-          <div className="mt-6 flex-1 overflow-y-auto pr-1 scrollbar-hide">
+          <div className="mt-4 flex-1 overflow-y-auto pr-1 scrollbar-hide sm:mt-6">
 
             {/* Description */}
 
             <p
               className="
-                leading-7
+                text-sm
+                leading-6
                 text-slate-400
+                sm:text-base
+                sm:leading-7
               "
             >
               {certificate.description}
@@ -198,16 +235,18 @@ export default function CertificateDetails({
 
             {/* Skills */}
 
-            <div className="mt-8">
+            <div className="mt-5 sm:mt-8">
 
               <p
                 className="
-                  mb-3
-                  text-sm
+                  mb-2
+                  text-xs
                   font-semibold
                   uppercase
                   tracking-wider
                   text-slate-500
+                  sm:mb-3
+                  sm:text-sm
                 "
               >
                 Skills
@@ -223,10 +262,13 @@ export default function CertificateDetails({
                       border
                       border-cyan-400/20
                       bg-cyan-400/10
-                      px-3
-                      py-1.5
-                      text-xs
+                      px-2.5
+                      py-1
+                      text-[11px]
                       text-cyan-300
+                      sm:px-3
+                      sm:py-1.5
+                      sm:text-xs
                     "
                   >
                     {skill}
@@ -242,9 +284,9 @@ export default function CertificateDetails({
             {!completed &&
               certificate.progress && (
 
-                <div className="mt-8">
+                <div className="mt-5 sm:mt-8">
 
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-xs sm:text-sm">
 
                     <span className="text-slate-400">
                       Progress
@@ -258,18 +300,19 @@ export default function CertificateDetails({
 
                   <div
                     className="
-                      mt-3
+                      mt-2
                       h-2
                       overflow-hidden
                       rounded-full
                       bg-white/10
+                      sm:mt-3
                     "
                   >
                     <div
                       className="
                         h-full
                         rounded-full
-                        bg-gradient-to-r
+                        bg-linear-to-r
                         from-amber-400
                         to-cyan-400
                       "
@@ -283,9 +326,11 @@ export default function CertificateDetails({
                   {certificate.expectedCompletion && (
                     <p
                       className="
-                        mt-3
-                        text-sm
+                        mt-2
+                        text-xs
                         text-slate-500
+                        sm:mt-3
+                        sm:text-sm
                       "
                     >
                       Expected Completion:
@@ -304,7 +349,7 @@ export default function CertificateDetails({
 
               <div
                 className="
-                  mt-8
+                  mt-5
                   flex
                   items-center
                   gap-3
@@ -312,22 +357,28 @@ export default function CertificateDetails({
                   border
                   border-white/10
                   bg-white/5
-                  p-4
+                  p-3
+                  sm:mt-8
+                  sm:p-4
                 "
               >
 
                 <ShieldCheck
+                  size={18}
+                  className="shrink-0 text-cyan-400 sm:hidden"
+                />
+                <ShieldCheck
                   size={20}
-                  className="text-cyan-400"
+                  className="hidden shrink-0 text-cyan-400 sm:block"
                 />
 
-                <div>
+                <div className="min-w-0">
 
                   <p className="text-xs text-slate-500">
                     Credential ID
                   </p>
 
-                  <p className="text-sm text-white">
+                  <p className="truncate text-sm text-white">
                     {certificate.credentialId}
                   </p>
 
@@ -342,7 +393,7 @@ export default function CertificateDetails({
           {/* Button — pinned to the bottom, outside the scroll area, so it
               never moves regardless of how much content is above it. */}
 
-          <div className="mt-6 shrink-0">
+          <div className="mt-4 shrink-0 sm:mt-6">
 
             {completed && certificate.pdf ? (
 
@@ -355,17 +406,22 @@ export default function CertificateDetails({
                   gap-2
                   rounded-full
                   bg-cyan-400
-                  px-6
-                  py-3
+                  px-5
+                  py-2.5
+                  text-sm
                   font-medium
                   text-slate-950
                   transition
                   hover:scale-105
+                  sm:px-6
+                  sm:py-3
+                  sm:text-base
                 "
               >
                 View Certificate
 
-                <ArrowUpRight size={18} />
+                <ArrowUpRight size={16} className="sm:hidden" />
+                <ArrowUpRight size={18} className="hidden sm:block" />
 
               </button>
 
@@ -377,9 +433,13 @@ export default function CertificateDetails({
                   rounded-full
                   border
                   border-white/10
-                  px-6
-                  py-3
+                  px-5
+                  py-2.5
+                  text-sm
                   text-slate-500
+                  sm:px-6
+                  sm:py-3
+                  sm:text-base
                 "
               >
                 Certificate Coming Soon
@@ -391,16 +451,6 @@ export default function CertificateDetails({
 
         </div>
       </div>
-
-      {/* Certificate viewer, rendered directly into document.body via a
-          portal. This is what a plain `fixed inset-0` here would NOT
-          achieve on its own: this component (and the hero card next to
-          it) sit inside motion.div ancestors that animate `transform`
-          (x, rotateX, rotateY). Any transformed ancestor becomes a new
-          containing block for its fixed-position descendants, so a
-          modal rendered in place here would end up clipped/positioned
-          relative to that animated card instead of the viewport. The
-          portal sidesteps that entirely. */}
 
       {completed &&
         certificate.pdf &&
@@ -417,12 +467,12 @@ export default function CertificateDetails({
                 className="
                   fixed
                   inset-0
-                  z-[100]
+                  z-100
                   flex
                   items-center
                   justify-center
                   bg-slate-950/80
-                  p-4
+                  p-3
                   backdrop-blur-md
                   sm:p-8
                 "
@@ -441,11 +491,12 @@ export default function CertificateDetails({
                     max-w-6xl
                     flex-col
                     overflow-hidden
-                    rounded-[28px]
+                    rounded-2xl
                     border
                     border-white/10
                     bg-slate-900
                     shadow-[0_35px_90px_rgba(0,0,0,.5)]
+                    sm:rounded-[28px]
                   "
                 >
                   <div
@@ -456,8 +507,10 @@ export default function CertificateDetails({
                       justify-between
                       border-b
                       border-white/10
-                      px-6
-                      py-4
+                      px-4
+                      py-3
+                      sm:px-6
+                      sm:py-4
                     "
                   >
                     <div className="min-w-0">
@@ -520,6 +573,7 @@ export default function CertificateDetails({
                         src={certificate.pdf}
                         alt={`${certificate.title} certificate`}
                         className="h-full w-full object-contain"
+                        loading="lazy"
                       />
                     ) : (
                       // PDF: append viewer hints so it opens fit-to-width
@@ -530,6 +584,7 @@ export default function CertificateDetails({
                         src={`${certificate.pdf}#view=FitH&toolbar=0`}
                         title={`${certificate.title} certificate`}
                         className="h-full w-full"
+                        loading="lazy"
                       />
                     )}
                   </div>

@@ -13,20 +13,20 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-32"
+      className="py-16 sm:py-24 lg:py-32"
     >
 
       {/* Section Header */}
       <Reveal>
 
-        <div className="container-width mb-20">
+        <div className="container-width mb-12 sm:mb-16 lg:mb-20">
 
-          <p className="text-cyan-400 uppercase tracking-[0.35em]">
+          <p className="text-sm text-cyan-400 uppercase tracking-[0.35em] sm:text-base">
             About Me
           </p>
 
 
-          <h2 className="mt-4 text-5xl font-black">
+          <h2 className="mt-3 text-3xl font-black sm:mt-4 sm:text-4xl lg:text-5xl">
             Beyond the Code
           </h2>
 
@@ -97,7 +97,7 @@ export default function About() {
           delay={0.25}
         >
 
-          <div className="mt-28 grid gap-8 lg:grid-cols-2">
+          <div className="mt-16 grid gap-6 sm:mt-20 sm:gap-8 lg:mt-28 lg:grid-cols-2">
 
             <ProfileCard />
 

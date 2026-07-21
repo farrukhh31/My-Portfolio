@@ -53,6 +53,7 @@ export default function ContactCard() {
   );
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (window.matchMedia?.("(pointer: coarse)").matches) return;
     const rect = cardRef.current?.getBoundingClientRect();
     if (!rect) return;
     mouseX.set((e.clientX - rect.left) / rect.width);
@@ -89,7 +90,7 @@ export default function ContactCard() {
         transformPerspective: 1200,
         transformStyle: "preserve-3d",
       }}
-      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-colors duration-300 hover:border-cyan-400/20"
+      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition-colors duration-300 hover:border-cyan-400/20 sm:rounded-3xl sm:p-8"
     >
       {/* Cursor-tracking spotlight */}
       <motion.div
@@ -111,26 +112,27 @@ export default function ContactCard() {
       {/* Content sits on its own raised Z layer so it visibly separates
           from the glass backing as the card tilts */}
       <div className="relative z-10" style={{ transform: "translateZ(24px)" }}>
-        <h3 className="text-3xl font-bold">Contact Information</h3>
+        <h3 className="text-2xl font-bold sm:text-3xl">Contact Information</h3>
 
-        <p className="mt-4 leading-7 text-slate-400">
+        <p className="mt-4 text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">
           Feel free to reach out for internships, collaborations, freelance
           opportunities, or simply to connect.
         </p>
 
         {/* Contact Details */}
-        <div className="mt-10 space-y-6">
+        <div className="mt-7 space-y-5 sm:mt-10 sm:space-y-6">
           {infos.map((item) => (
             <motion.div
               key={item.title}
               whileHover={{ x: 8 }}
-              className="flex items-center gap-5"
+              className="flex items-center gap-3 sm:gap-5"
             >
               <div
-                className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-300 shadow-[0_10px_30px_-10px_rgba(34,211,238,0.4)]"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-400/10 text-cyan-300 shadow-[0_10px_30px_-10px_rgba(34,211,238,0.4)] sm:h-14 sm:w-14 sm:rounded-2xl"
                 style={{ transform: "translateZ(18px)" }}
               >
-                <item.icon size={24} />
+                <item.icon size={20} className="sm:hidden" />
+                <item.icon size={24} className="hidden sm:block" />
               </div>
 
               <div className="min-w-0 flex-1">
@@ -139,12 +141,12 @@ export default function ContactCard() {
                 {item.href ? (
                   <a
                     href={item.href}
-                    className="font-medium transition hover:text-cyan-400"
+                    className="wrap-break-word font-medium transition hover:text-cyan-400"
                   >
                     {item.value}
                   </a>
                 ) : (
-                  <p className="font-medium">{item.value}</p>
+                  <p className="wrap-break-word font-medium">{item.value}</p>
                 )}
               </div>
 
@@ -153,12 +155,12 @@ export default function ContactCard() {
                   type="button"
                   onClick={() => handleCopy(item.title, item.copyValue!)}
                   aria-label={`Copy ${item.title.toLowerCase()}`}
-                  className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-white/10 text-slate-400 transition-colors duration-200 hover:border-cyan-400/40 hover:text-cyan-300"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 text-slate-400 transition-colors duration-200 hover:border-cyan-400/40 hover:text-cyan-300 sm:h-9 sm:w-9"
                 >
                   {copiedTitle === item.title ? (
-                    <Check size={16} className="text-green-400" />
+                    <Check size={15} className="text-green-400" />
                   ) : (
-                    <Copy size={16} />
+                    <Copy size={15} />
                   )}
                 </button>
               )}
@@ -174,24 +176,28 @@ export default function ContactCard() {
           whileHover={{ scale: 1.03, y: -2 }}
           whileTap={{ scale: 0.97 }}
           style={{ z: 20 }}
-          className="mt-8 flex items-center justify-between rounded-2xl border border-green-500/20 bg-gradient-to-r from-green-500/10 to-emerald-500/10 px-6 py-5 transition-all duration-300 hover:border-green-400 hover:shadow-[0_0_35px_rgba(34,197,94,.25)]"
+          className="mt-6 flex items-center justify-between gap-3 rounded-2xl border border-green-500/20 bg-linear-to-r from-green-500/10 to-emerald-500/10 px-4 py-4 transition-all duration-300 hover:border-green-400 hover:shadow-[0_0_35px_rgba(34,197,94,.25)] sm:mt-8 sm:gap-4 sm:px-6 sm:py-5"
         >
-          <div className="flex items-center gap-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-500/15">
-              <FaWhatsapp size={30} className="text-green-400" />
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-green-500/15 sm:h-14 sm:w-14 sm:rounded-2xl">
+              <FaWhatsapp size={22} className="text-green-400 sm:hidden" />
+              <FaWhatsapp size={30} className="hidden text-green-400 sm:block" />
             </div>
 
-            <div>
-              <p className="text-sm text-slate-400">
+            <div className="min-w-0">
+              <p className="truncate text-xs text-slate-400 sm:text-sm">
                 Prefer a quick conversation?
               </p>
-              <p className="font-semibold text-white">
+              <p className="truncate text-sm font-semibold text-white sm:text-base">
                 Message me on WhatsApp
               </p>
             </div>
           </div>
 
-          <motion.span whileHover={{ x: 5 }} className="text-2xl text-green-400">
+          <motion.span
+            whileHover={{ x: 5 }}
+            className="shrink-0 text-xl text-green-400 sm:text-2xl"
+          >
             →
           </motion.span>
         </motion.a>

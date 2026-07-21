@@ -10,6 +10,7 @@ import {
 import {
   AnimatePresence,
   motion,
+  useReducedMotion,
 } from "framer-motion";
 
 import { certificates } from "./certificatesData";
@@ -60,6 +61,8 @@ export default function Certificates() {
 
   const touchStart =
     useRef<number | null>(null);
+
+  const shouldReduceMotion = useReducedMotion();
 
 
 
@@ -289,6 +292,9 @@ min-h-screen
 overflow-hidden
 flex
 items-center
+py-16
+sm:py-20
+lg:py-0
 "
 >
 
@@ -302,16 +308,23 @@ overflow-hidden
 
 <div
 className="
+pointer-events-none
 absolute
 left-1/2
 top-1/2
-h-[600px]
-w-[600px]
+h-75
+w-75
 -translate-x-1/2
 -translate-y-1/2
 rounded-full
 bg-cyan-500/10
-blur-[180px]
+blur-[100px]
+sm:h-112.5
+sm:w-112.5
+sm:blur-[140px]
+lg:h-150
+lg:w-150
+lg:blur-[180px]
 "
 />
 
@@ -326,6 +339,9 @@ container-width
 relative
 z-10
 w-full
+px-4
+sm:px-6
+lg:px-8
 "
 >
 
@@ -348,19 +364,25 @@ className="text-center"
 
 
 <p className="
+text-xs
 uppercase
-tracking-[0.35em]
+tracking-[0.2em]
 text-cyan-400
+sm:text-base
+sm:tracking-[0.35em]
 ">
 Learning Journey
 </p>
 
 
 <h2 className="
-mt-4
-text-5xl
+mt-3
+text-3xl
 font-black
 text-white
+sm:mt-4
+sm:text-4xl
+lg:text-5xl
 ">
 Certificates
 </h2>
@@ -368,9 +390,12 @@ Certificates
 
 <p className="
 mx-auto
-mt-5
+mt-4
 max-w-2xl
+text-sm
 text-slate-400
+sm:mt-5
+sm:text-base
 ">
 Verified certifications and continuous learning across Game Development, Artificial Intelligence and Modern Web Technologies.
 </p>
@@ -384,11 +409,13 @@ Verified certifications and continuous learning across Game Development, Artific
 
 <div
 className="
-mt-10
+mt-6
 flex
 flex-wrap
 justify-center
-gap-4
+gap-2
+sm:mt-10
+sm:gap-4
 "
 >
 
@@ -403,10 +430,14 @@ onClick={()=>setFilter(item.value)}
 className={`
 rounded-full
 border
-px-6
-py-3
+px-4
+py-2
+text-sm
 transition-all
 duration-300
+sm:px-6
+sm:py-3
+sm:text-base
 
 ${
 filter===item.value
@@ -429,10 +460,13 @@ onTouchStart={handleTouchStart}
 onTouchEnd={handleTouchEnd}
 
 className="
-mt-12
+mt-8
 grid
 items-center
-gap-12
+gap-8
+sm:mt-12
+sm:gap-10
+lg:gap-12
 lg:grid-cols-[1.4fr_.9fr]
 "
 >
@@ -456,23 +490,23 @@ loading ?
 
 key={active.id+"hero"}
 
-initial={{
-opacity:0,
-x:-50,
-scale:.98
-}}
+initial={
+shouldReduceMotion
+? { opacity:0 }
+: { opacity:0, x:-50, scale:.98 }
+}
 
-animate={{
-opacity:1,
-x:0,
-scale:1
-}}
+animate={
+shouldReduceMotion
+? { opacity:1 }
+: { opacity:1, x:0, scale:1 }
+}
 
-exit={{
-opacity:0,
-x:-50,
-scale:.98
-}}
+exit={
+shouldReduceMotion
+? { opacity:0 }
+: { opacity:0, x:-50, scale:.98 }
+}
 
 transition={{
 duration:.55,
@@ -504,20 +538,22 @@ onNext={next}
 
 key={active.id+"details"}
 
-initial={{
-opacity:0,
-x:50
-}}
+initial={
+shouldReduceMotion
+? { opacity:0 }
+: { opacity:0, x:50 }
+}
 
 animate={{
 opacity:1,
 x:0
 }}
 
-exit={{
-opacity:0,
-x:50
-}}
+exit={
+shouldReduceMotion
+? { opacity:0 }
+: { opacity:0, x:50 }
+}
 
 transition={{
 duration:.55,

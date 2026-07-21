@@ -350,10 +350,25 @@ main {
   width:
     min(
       1280px,
-      calc(100% - 48px)
+      calc(100% - 32px)
     );
 
   margin-inline:auto;
+
+}
+
+
+@media (min-width: 640px) {
+
+  .container-width {
+
+    width:
+      min(
+        1280px,
+        calc(100% - 48px)
+      );
+
+  }
 
 }
 
@@ -367,14 +382,50 @@ main {
 
   min-height:100vh;
 
-  padding-block:6rem;
+  padding-block:3.5rem;
 
 }
 
 
 .section-padding {
 
-  padding-block:7rem;
+  padding-block:4rem;
+
+}
+
+
+@media (min-width: 640px) {
+
+  .section {
+
+    padding-block:4.5rem;
+
+  }
+
+
+  .section-padding {
+
+    padding-block:5rem;
+
+  }
+
+}
+
+
+@media (min-width: 1024px) {
+
+  .section {
+
+    padding-block:6rem;
+
+  }
+
+
+  .section-padding {
+
+    padding-block:7rem;
+
+  }
 
 }
 
@@ -578,10 +629,10 @@ main {
   background:var(--glass);
 
   backdrop-filter:
-    blur(26px);
+    blur(14px);
 
   -webkit-backdrop-filter:
-    blur(26px);
+    blur(14px);
 
 
   border:
@@ -590,6 +641,21 @@ main {
 
   box-shadow:
     var(--shadow);
+
+}
+
+
+@media (min-width: 768px) {
+
+  .glass {
+
+    backdrop-filter:
+      blur(26px);
+
+    -webkit-backdrop-filter:
+      blur(26px);
+
+  }
 
 }
 
@@ -879,6 +945,62 @@ transform:translate(0,0);
 
 }
 
+
+
+/* ==================================================
+   Mobile / Low-power optimizations
+================================================== */
+
+@media (max-width: 640px) {
+
+  body::before {
+
+    background-size:40px 40px;
+
+  }
+
+
+  body::after {
+
+    opacity:.08;
+
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+
+    scroll-behavior:auto;
+
+  }
+
+
+  .aurora::before,
+  .aurora::after,
+  .glow,
+  .float,
+  .shine::after {
+
+    animation:none !important;
+
+  }
+
+
+  *,
+  *::before,
+  *::after {
+
+    animation-duration:0.01ms !important;
+
+    animation-iteration-count:1 !important;
+
+    transition-duration:0.01ms !important;
+
+  }
+
+}
 
 
 /* Certificate Skeleton */

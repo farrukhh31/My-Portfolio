@@ -43,7 +43,7 @@ export default function ContactHeading() {
 
       <motion.h2
         variants={fadeUp}
-        className="text-5xl font-black md:text-6xl"
+        className="text-3xl font-black sm:text-4xl md:text-5xl lg:text-6xl"
       >
         Let's Build Something
         <span className="text-gradient">
@@ -56,11 +56,16 @@ export default function ContactHeading() {
         variants={fadeUp}
         className="
           mx-auto
-          mt-8
+          mt-6
           max-w-2xl
-          text-lg
-          leading-8
+          px-2
+          text-base
+          leading-7
           text-slate-400
+          sm:mt-8
+          sm:px-0
+          sm:text-lg
+          sm:leading-8
         "
       >
         Whether you have an internship opportunity, freelance project,

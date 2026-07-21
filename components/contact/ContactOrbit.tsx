@@ -28,14 +28,9 @@ function OrbitNode({
   node: (typeof nodes)[number];
   rotation: MotionValue<number>;
 }) {
-  // This node's live position around the ring, following the shared
-  // rotation value so all four stay perfectly in sync.
+  
   const nodeAngle = useTransform(rotation, (r) => r + node.angle);
 
-  // Depth-based presence: full strength face-on, eased down to almost
-  // nothing at the left/right profile. Instead of four icons pinned
-  // around the edges, only the badge (or two) currently facing the
-  // viewer ever reads clearly — the rest dissolve as they swing past.
   const opacity = useTransform(nodeAngle, (deg) => {
     const depth = Math.cos((deg * Math.PI) / 180);
     const front = Math.max(depth, 0);
@@ -96,7 +91,7 @@ export default function ContactOrbit() {
 
   return (
     <div
-      className="relative mx-auto mb-8 flex h-[300px] w-full max-w-md items-center justify-center sm:h-[340px]"
+      className="relative mx-auto mb-6 flex h-65 w-full max-w-md items-center justify-center sm:mb-8 sm:h-85"
       style={{ perspective: "1400px" }}
     >
       <div
@@ -113,16 +108,18 @@ export default function ContactOrbit() {
       </div>
 
       {/* Central core — sits outside the rotating group so it never spins */}
-      <div className="glass border-gradient glow relative z-10 flex h-36 w-36 flex-col items-center justify-center rounded-full text-center">
+      <div className="glass border-gradient glow relative z-10 flex h-28 w-28 flex-col items-center justify-center rounded-full text-center sm:h-36 sm:w-36">
         <span className="relative flex h-3 w-3">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
           <span className="relative inline-flex h-3 w-3 rounded-full bg-green-400" />
         </span>
-        <p className="mt-2 text-sm font-semibold text-white">Available</p>
-        <p className="mt-0.5 max-w-[7rem] text-[11px] leading-tight text-slate-400">
+        <p className="mt-2 text-xs font-semibold text-white sm:text-sm">
+          Available
+        </p>
+        <p className="mt-0.5 max-w-24 text-[10px] leading-tight text-slate-400 sm:max-w-28 sm:text-[11px]">
           For Internships &amp; Freelance Work
         </p>
       </div>
-    </div>
+      </div>
   );
 }

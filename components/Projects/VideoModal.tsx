@@ -41,7 +41,7 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: Props) 
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -70,7 +70,7 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: Props) 
               <button
                 onClick={onClose}
                 aria-label="Close video"
-                className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-white/15 text-slate-300 transition-colors duration-200 hover:border-white/30 hover:text-white"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 text-slate-300 transition-colors duration-200 hover:border-white/30 hover:text-white"
               >
                 <X size={18} />
               </button>

@@ -59,8 +59,8 @@ export default function RootLayout({
         relative
         min-h-screen
         overflow-x-hidden
-        bg-[var(--background)]
-        text-[var(--foreground)]
+        bg-(--background)
+        text-(--foreground)
         antialiased
         "
       >

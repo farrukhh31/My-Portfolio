@@ -18,7 +18,7 @@ export default function ProgressBar({
     <div className="mx-auto mt-8 w-56">
       <div className="h-1 overflow-hidden rounded-full bg-white/10">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-fuchsia-400 transition-all duration-500"
+          className="h-full rounded-full bg-linear-to-r from-cyan-400 via-sky-400 to-fuchsia-400 transition-all duration-500"
           style={{
             width: `${width}%`,
           }}

@@ -26,7 +26,7 @@ export default function Experience() {
 
   return (
     <section id="experience" className="container-width section-padding overflow-hidden">
-      <div className="mb-16 text-center">
+      <div className="mb-10 text-center sm:mb-16">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ export default function Experience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="mt-4 text-5xl font-black"
+          className="mt-4 text-3xl font-black sm:text-4xl md:text-5xl"
         >
           My Journey
         </motion.h2>
@@ -51,21 +51,24 @@ export default function Experience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="mx-auto mt-6 max-w-3xl text-slate-400"
+          className="mx-auto mt-6 max-w-3xl px-2 text-sm text-slate-400 sm:px-0 sm:text-base"
         >
           My academic and professional journey through software engineering, game
           development and DevOps.
         </motion.p>
       </div>
 
-      <div ref={containerRef} className="relative mx-auto max-w-5xl pl-16">
+      <div
+        ref={containerRef}
+        className="relative mx-auto max-w-5xl pl-10 sm:pl-14 md:pl-16"
+      >
         {/* Static faint track */}
-        <div className="absolute left-0 top-0 h-full w-[2px] bg-cyan-400/10" />
+        <div className="absolute left-0 top-0 h-full w-0.5 bg-cyan-400/10" />
 
         {/* Scroll-filled progress spine */}
         <motion.div
           style={{ scaleY: spineScale, transformOrigin: "top" }}
-          className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-cyan-400 via-cyan-300 to-fuchsia-400 shadow-[0_0_12px_rgba(34,211,238,.6)]"
+          className="absolute left-0 top-0 h-full w-0.5 bg-linear-to-b from-cyan-400 via-cyan-300 to-fuchsia-400 shadow-[0_0_12px_rgba(34,211,238,.6)]"
         />
 
         {/* Traveling glow that tracks how far you've scrolled through the timeline */}
@@ -77,7 +80,7 @@ export default function Experience() {
         </motion.div>
 
         {experience.map((item, index) => (
-          <div key={item.id} className="mb-12 last:mb-0">
+          <div key={item.id} className="mb-8 last:mb-0 sm:mb-12">
             <ExperienceCard item={item} index={index} />
           </div>
         ))}
