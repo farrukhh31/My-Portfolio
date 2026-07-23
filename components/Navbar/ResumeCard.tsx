@@ -2,10 +2,10 @@
 
 import { FileText, Download, Eye } from "lucide-react";
 
-export default function ResumeCard() {
+export default function ResumeCard({ open }: { open?: boolean }) {
   return (
     <div
-      className="
+      className={`
         absolute
         right-0
         top-14
@@ -20,9 +20,6 @@ export default function ResumeCard() {
 
         p-4
 
-        opacity-0
-        invisible
-        pointer-events-none
         translate-y-2
 
         group-hover:opacity-100
@@ -38,7 +35,13 @@ export default function ResumeCard() {
         transition-all
         duration-200
         ease-out
-      "
+
+        ${
+          open
+            ? "opacity-100 visible pointer-events-auto translate-y-0"
+            : "opacity-0 invisible pointer-events-none"
+        }
+      `}
     >
       <div className="mb-4 flex items-center gap-3">
         <div

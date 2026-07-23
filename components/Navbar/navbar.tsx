@@ -31,8 +31,10 @@ export default function Navbar() {
   const [active, setActive] = useState("hero");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [palette, setPalette] = useState(false);
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
+  const resumeRef = useRef<HTMLDivElement>(null);
 
   /* Scroll Percentage */
 
@@ -77,6 +79,7 @@ export default function Navbar() {
 
       if (e.key === "Escape") {
         setPalette(false);
+        setResumeOpen(false);
       }
     };
 
@@ -93,6 +96,24 @@ export default function Navbar() {
     const close = (e: MouseEvent | TouchEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setMobileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", close);
+    document.addEventListener("touchstart", close);
+
+    return () => {
+      document.removeEventListener("mousedown", close);
+      document.removeEventListener("touchstart", close);
+    };
+  }, []);
+
+  /* Close Resume Dropdown On Outside Click */
+
+  useEffect(() => {
+    const close = (e: MouseEvent | TouchEvent) => {
+      if (resumeRef.current && !resumeRef.current.contains(e.target as Node)) {
+        setResumeOpen(false);
       }
     };
 
@@ -269,9 +290,11 @@ export default function Navbar() {
               <ThemeToggle />
             </div>
 
-            <div className="relative shrink-0 group">
+            <div ref={resumeRef} className="relative shrink-0 group">
               <button
                 type="button"
+                onClick={() => setResumeOpen((v) => !v)}
+                aria-expanded={resumeOpen}
                 className="
                   flex
                   items-center
@@ -301,7 +324,7 @@ export default function Navbar() {
                 Resume
               </button>
 
-              <ResumeCard />
+              <ResumeCard open={resumeOpen} />
             </div>
 
             {/* Ctrl + K */}
@@ -487,8 +510,9 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                <button
-                  type="button"
+                <a
+                  href="/Farrukh_Ahmad_Resume.pdf"
+                  download="Farrukh_Ahmad_Resume.pdf"
                   className="
                     mt-4
 
@@ -514,7 +538,7 @@ export default function Navbar() {
                 >
                   <Download size={18} />
                   Resume
-                </button>
+                </a>
               </div>
             </motion.div>
           )}

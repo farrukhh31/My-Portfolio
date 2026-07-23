@@ -72,12 +72,13 @@ export default function ProjectCard({ project, index = 0 }: Props) {
       <Magnetic>
         <motion.article
           ref={cardRef}
+          id={project.slug}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           style={{ rotateX, rotateY, transformPerspective: 1000 }}
           whileHover={{ y: -10, scale: 1.02 }}
           transition={{ duration: 0.3 }}
-          className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition-colors duration-300 ${style.cardHoverBorder} ${style.glow}`}
+          className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl scroll-mt-28 transition-colors duration-300 ${style.cardHoverBorder} ${style.glow}`}
         >
           {/* Category-colored top edge — reveals on hover, the card's discipline "handle" */}
           <div

@@ -32,26 +32,9 @@ export const recruiterData = {
     description: "Bachelor of Science in Gaming & Animation",
   },
 
-  projects: [
-    {
-      title: "Kitchen Realm",
-      description:
-        "A unique game jam project featuring a corrupted kitchen world with interactive gameplay mechanics.",
-      tech: ["Unity", "C#", "Game Design"],
-    },
-    {
-      title: "AR Object Experience",
-      description:
-        "Augmented reality application using Unity and Vuforia multi-target tracking.",
-      tech: ["Unity", "AR", "Vuforia"],
-    },
-    {
-      title: "Recruiter Snapshot",
-      description:
-        "A premium interactive developer portfolio dashboard built with React and animations.",
-      tech: ["React", "TypeScript", "Framer Motion"],
-    },
-  ],
+  // Featured Projects now come directly from the real project list in
+  // Projects-s.tsx (see FeaturedProjects.tsx), so they stay in sync
+  // automatically instead of being duplicated and maintained here too.
 
   stats: [
     {

@@ -64,7 +64,7 @@ export default function CommandPalette({
       case "resume": {
         const link = document.createElement("a");
 
-        link.href = "/public/Farrukh_Ahmad_Resume.pdf";
+        link.href = "/Farrukh_Ahmad_Resume.pdf";
         link.download = "Farrukh_Ahmad_Resume.pdf";
         link.click();
 
@@ -93,9 +93,6 @@ export default function CommandPalette({
         break;
 
       case "sudo": {
-        // NEXT_PUBLIC_FORMSPREE_FORM_ID is a form endpoint id, not a secret —
-        // Formspree's client-side submission model expects it to be public,
-        // same as any <form action="https://formspree.io/f/...">.
         const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
 
         if (formId) {
@@ -106,9 +103,6 @@ export default function CommandPalette({
               Accept: "application/json",
             },
             body: JSON.stringify({
-              // No fake "email" field here on purpose — Formspree uses it to
-              // set the Reply-To header, and a Reply-To pointing at a domain
-              // with no real mailbox/SPF/DKIM is a strong spam signal.
               name: "Portfolio Easter Egg",
               message:
                 "A visitor triggered the sudo hire easter egg in your command palette.",
